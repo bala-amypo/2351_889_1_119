@@ -1,8 +1,13 @@
+package com.example.demo.controller;
+import com.example.demo.model.RiskAnalysisResult;
+import com.example.demo.service.PortfolioHoldingService;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/risk-analysis")
 public class RiskAnalysisController {
 
-    private final RiskAnalysisService riskAnalysisService;
+    private final cService riskAnalysisService;
 
     public RiskAnalysisController(RiskAnalysisService riskAnalysisService) {
         this.riskAnalysisService = riskAnalysisService;

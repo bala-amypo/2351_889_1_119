@@ -1,3 +1,5 @@
+package com.example.demo.controller;
+
 @RestController
 @RequestMapping("/portfolios")
 public class UserPortfolioController {

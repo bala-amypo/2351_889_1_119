@@ -1,3 +1,11 @@
+package com.example.demo.controller;
+
+import com.example.demo.model.PortfolioHolding;
+import com.example.demo.service.PortfolioHoldingService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/holdings")
 public class PortfolioHoldingController {
