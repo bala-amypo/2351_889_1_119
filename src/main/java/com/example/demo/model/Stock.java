@@ -1,15 +1,15 @@
 package com.example.demo.model;
-
+import jakarta.persistence.*;
 public class Stockentity{
     @Id
-    private int id;
-    @column(ticker=unique)
+    private Long id;
+    @column(unique=true)
     private String ticker;
     private String companyname;
     private String sector;
     private boolean active;
 
-    public Stock(int id, String ticker, String companyname, String sector, boolean active) {
+    public Stock(Long id, String ticker, String companyname, String sector, boolean active) {
         this.id = id;
         this.ticker = ticker;
         this.companyname = companyname;
@@ -18,10 +18,10 @@ public class Stockentity{
     }
     public Stock() {
     }
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getTicker() {
