@@ -1,11 +1,12 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 public class PortfolioHolding{
     @Id
     private Long id;
     @Positive
     private Double quantity;
-    @
+    @PositiveOrZero
     private Decimal marketValue;
     private localdate lastUpdated;
     public PortfolioHolding(Long id, Double quantity, Decimal marketValue) {
