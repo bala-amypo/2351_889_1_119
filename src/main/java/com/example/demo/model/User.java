@@ -1,7 +1,9 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import java.time.*;
+import java.time.LocalDate;
+
+
 public class User{
     @Id
     private Long id;

@@ -1,6 +1,8 @@
 package com.example.demo.model;
-
+import jakarta.validation.constraints.*;
+import java.time.LocalDate;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "stocks")
