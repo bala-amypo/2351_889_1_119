@@ -39,7 +39,9 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void deleteStock(Long id) {
-        stockRepository.deleteById(id);
+    public void deactivateStock(Long id) {
+        Stock stock = getStockById(id);
+        stock.setActive(false);
+        stockRepository.save(stock);
     }
 }

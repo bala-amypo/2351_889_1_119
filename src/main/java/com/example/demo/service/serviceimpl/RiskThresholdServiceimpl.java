@@ -28,6 +28,11 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     }
 
     @Override
+    public RiskThreshold getActiveThreshold() {
+        return repository.findByActiveTrue();
+    }
+
+    @Override
     public RiskThreshold getThresholdById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Not found"));
@@ -36,10 +41,5 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     @Override
     public List<RiskThreshold> getAllThresholds() {
         return repository.findAll();
-    }
-
-    @Override
-    public void deleteThreshold(Long id) {
-        repository.deleteById(id);
     }
 }

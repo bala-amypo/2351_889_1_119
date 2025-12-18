@@ -34,12 +34,14 @@ public class UserPortfolioServiceImpl implements UserPortfolioService {
     }
 
     @Override
-    public List<UserPortfolio> getAllPortfolios() {
-        return repository.findAll();
+    public List<UserPortfolio> getPortfoliosByUser(Long userId) {
+        return repository.findByUserId(userId);
     }
 
     @Override
-    public void deletePortfolio(Long id) {
-        repository.deleteById(id);
+    public void deactivatePortfolio(Long id) {
+        UserPortfolio portfolio = getPortfolioById(id);
+        portfolio.setActive(false);
+        repository.save(portfolio);
     }
 }
