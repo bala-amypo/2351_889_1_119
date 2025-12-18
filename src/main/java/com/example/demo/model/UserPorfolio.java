@@ -7,8 +7,8 @@ public class UserPortfolio{
     private Long userId;
     private String portfolio;
     private boolean active;
-    private localdate Timestamp;
-    private localdate updatedAt;
+    private LocalDate Timestamp;
+    private LocalDate updatedAt;
     public UserPortfolio(Long id, Long userId, String portfolio, boolean active, localdate timestamp,
             localdate updatedAt) {
         this.id = id;

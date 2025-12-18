@@ -5,7 +5,7 @@ public class RiskAnalysisResult{
     @Id
     private Long id;
     @column(unique=true)
-    private localdate analysis;
+    private LocalDate analysis;
     private Double highestStockPercentage;
     private Double highestSectorPercentage;
     private boolean isHighRisk;

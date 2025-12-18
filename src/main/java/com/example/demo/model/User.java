@@ -9,6 +9,6 @@ public class User{
     @column(unique=true)
     private String email;
     private String password;
-    private localdate createdAt;
+    private LocalDateTime createdAt;
 
 }

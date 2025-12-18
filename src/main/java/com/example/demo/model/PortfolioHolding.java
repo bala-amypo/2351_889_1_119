@@ -8,7 +8,7 @@ public class PortfolioHolding{
     private Double quantity;
     @PositiveOrZero
     private Decimal marketValue;
-    private localdate lastUpdated;
+    private LocalDate lastUpdated;
     public PortfolioHolding(Long id, Double quantity, Decimal marketValue) {
         this.id = id;
         this.quantity = quantity;
