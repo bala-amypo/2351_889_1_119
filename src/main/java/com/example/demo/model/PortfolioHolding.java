@@ -10,9 +10,9 @@ public class PortfolioHolding{
     @Positive
     private Double quantity;
     @PositiveOrZero
-    private Decimal marketValue;
+    private BigDecimal marketValue;
     private LocalDate lastUpdated;
-    public PortfolioHolding(Long id, Double quantity, Decimal marketValue) {
+    public PortfolioHolding(Long id, Double quantity, BigDecimal marketValue) {
         this.id = id;
         this.quantity = quantity;
         this.marketValue = marketValue;
@@ -34,7 +34,7 @@ public class PortfolioHolding{
     public Decimal getMarketValue() {
         return marketValue;
     }
-    public void setMarketValue(Decimal marketValue) {
+    public void setMarketValue(BigDecimal marketValue) {
         this.marketValue = marketValue;
     }
 
