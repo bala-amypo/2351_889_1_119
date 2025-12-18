@@ -1,12 +1,11 @@
-import java.util.*;
 package com.example.demo.service;
-package com.example.demo.model.RiskAnalysisResult;
 
-public interface RiskAnalysisResultService extends RiskAnalysisResult
-{
-   RiskAnalysisResult analyzePortfolio(Long portfoliold);
-   RiskAnalysisResult getAnalysisById(Long id);
-   RiskAnalysisResult getAnalysesForPortfolio(Long portfoliold);
+import com.example.demo.model.RiskAnalysisResult;
+import java.util.List;
 
+public interface RiskAnalysisService {
 
+    RiskAnalysisResult getAnalysisById(Long id);
+
+    List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId);
 }
