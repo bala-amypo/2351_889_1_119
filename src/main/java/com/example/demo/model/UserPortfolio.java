@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;  // For @Entity, @Id, etc.
-import java.time.LocalDate;    // Correct import for LocalDate
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "user_portfolio")
@@ -11,17 +11,12 @@ public class UserPortfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "portfolio_name", nullable = false)
     private String portfolioName;
 
-    @Column(name = "start_date")
-    private LocalDate startDate;   // Fixed type
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;     // Fixed type
-
-    @Column(name = "active")
-    private boolean active = true; // Optional field to track deactivation
+    private boolean active = true; // Track deactivation
 
     // Constructors
     public UserPortfolio() {}
@@ -33,48 +28,18 @@ public class UserPortfolio {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getPortfolioName() { return portfolioName; }
+    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
 
-    public String getPortfolioName() {
-        return portfolioName;
-    }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public void setPortfolioName(String portfolioName) {
-        this.portfolioName = portfolioName;
-    }
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    // Optional: convenience method to deactivate portfolio
-    public void deactivate() {
-        this.active = false;
-    }
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }

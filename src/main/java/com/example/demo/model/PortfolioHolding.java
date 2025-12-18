@@ -1,30 +1,40 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 @Entity
-public class UserPortfolio {
+@Table(name = "portfolio_holding")
+public class PortfolioHolding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String portfolioName;
+    private String name;
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private BigDecimal amount;
+    private BigDecimal price;
+
+    // Constructors
+    public PortfolioHolding() {}
+
+    public PortfolioHolding(String name, BigDecimal amount, BigDecimal price) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+    }
 
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public String getPortfolioName() { return portfolioName; }
-    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public LocalDate getStartDate() { return startDate; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+    public BigDecimal getAmount() { return amount; }
+    public void setAmount(BigDecimal amount) { this.amount = amount; }
 
-    public LocalDate getEndDate() { return endDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 }
