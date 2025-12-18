@@ -1,4 +1,4 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.serviceimpl;
 
 import com.example.demo.model.RiskThreshold;
 import com.example.demo.repository.RiskThresholdRepository;
@@ -22,24 +22,17 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     }
 
     @Override
-    public RiskThreshold updateThreshold(Long id, RiskThreshold threshold) {
-        threshold.setId(id);
-        return repository.save(threshold);
-    }
-
-    @Override
-    public RiskThreshold getActiveThreshold() {
-        return repository.findByActiveTrue();
-    }
-
-    @Override
     public RiskThreshold getThresholdById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found"));
+        return repository.findById(id).orElse(null);
     }
 
     @Override
     public List<RiskThreshold> getAllThresholds() {
         return repository.findAll();
+    }
+
+    @Override
+    public RiskThreshold getActiveThreshold() {
+        return repository.findByActiveTrue();
     }
 }
