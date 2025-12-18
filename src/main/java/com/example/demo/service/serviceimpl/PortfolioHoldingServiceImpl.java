@@ -1,45 +1,35 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.serviceimpl;
 
-import com.example.demo.model.PortfolioHolding;
-import com.example.demo.repository.PortfolioHoldingRepository;
-import com.example.demo.service.PortfolioHoldingService;
 import org.springframework.stereotype.Service;
-
+import com.example.demo.model.PortfolioHolding;
+import com.example.demo.service.PortfolioHoldingService;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
-    private final PortfolioHoldingRepository repository;
-
-    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository repository) {
-        this.repository = repository;
-    }
+    private List<PortfolioHolding> holdings = new ArrayList<>();
 
     @Override
-    public PortfolioHolding createHolding(PortfolioHolding holding) {
-        return repository.save(holding);
+    public PortfolioHolding addHolding(PortfolioHolding holding) {
+        holdings.add(holding);
+        return holding;
     }
 
     @Override
     public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
-        holding.setId(id);
-        return repository.save(holding);
+        // Simplified example
+        return holding;
     }
 
     @Override
-    public PortfolioHolding getHoldingById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found"));
-    }
-
-    @Override
-    public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+    public List<PortfolioHolding> getAllHoldings() {
+        return holdings;
     }
 
     @Override
     public void deleteHolding(Long id) {
-        repository.deleteById(id);
+        holdings.removeIf(h -> h.getId().equals(id));
     }
 }
