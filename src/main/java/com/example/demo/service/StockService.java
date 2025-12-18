@@ -1,12 +1,12 @@
 import java.util.*;
 package com.example.demo.service;
-package com.example.demo.entity.Stockentity;
+package com.example.demo.entity.Stock;
 
 public interface StockService{
-    Stockentity savedata(Stockentity st);
-    Stockentity getidval(int id);
-    List<Stockentity>getall();
-    Stockentity update(int id,Stockentity st);
+    Stock savedata(Stock st);
+    Stock getidval(int id);
+    List<Stock>getall();
+    Stock update(int id,Stock st);
     void delete(int id);
 
 }

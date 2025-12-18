@@ -9,14 +9,14 @@ public class Stockentity{
     private String sector;
     private boolean active;
 
-    public Stockentity(int id, String ticker, String companyname, String sector, boolean active) {
+    public Stock(int id, String ticker, String companyname, String sector, boolean active) {
         this.id = id;
         this.ticker = ticker;
         this.companyname = companyname;
         this.sector = sector;
         this.active = active;
     }
-    public Stockentity() {
+    public Stock() {
     }
     public int getId() {
         return id;
