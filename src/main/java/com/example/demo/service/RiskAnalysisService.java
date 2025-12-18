@@ -4,7 +4,9 @@ package com.example.demo.model.RiskAnalysisResult;
 
 public interface RiskAnalysisResultService extends RiskAnalysisResult
 {
-   RiskAnalysisResult analyzePortfolio(Long port)
+   RiskAnalysisResult analyzePortfolio(Long portfoliold);
+   RiskAnalysisResult getAnalysisById(Long id);
+   RiskAnalysisResult getAnalysesForPortfolio(Long portfoliold);
 
 
 }
