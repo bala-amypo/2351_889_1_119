@@ -2,7 +2,7 @@ import java.util.*;
 package com.example.demo.service;
 package com.example.demo.model.Stock;
 
-public interface StockService{
+public interface StockService extends Stock{
     Stock savedata(Stock st);
     Stock getidval(int id);
     List<Stock>getall();
