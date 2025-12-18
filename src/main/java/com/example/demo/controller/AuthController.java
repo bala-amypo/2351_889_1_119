@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-
 
 @RestController
 @RequestMapping("/auth")
@@ -17,12 +15,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
+    public User register(@RequestBody User user) {
         return userService.registerUser(user);
-    }
-
-    @GetMapping("/user/{email}")
-    public User getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
     }
 }
