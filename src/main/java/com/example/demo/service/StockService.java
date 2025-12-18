@@ -1,6 +1,6 @@
 import java.util.*;
 package com.example.demo.service;
-package com.example.demo.entity.Stock;
+package com.example.demo.model.Stock;
 
 public interface StockService{
     Stock savedata(Stock st);
