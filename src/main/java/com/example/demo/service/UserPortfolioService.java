@@ -2,13 +2,13 @@ import java.util.*;
 package com.example.demo.service;
 package com.example.demo.model.UserPortfolio;
 
-public interface StockService extends Stock
+public interface UserPortfolioService extends UserPortfolio
 {
-    Stock createStock(Stock stock);
-    Stock updateStock(Long id,Stock stock);
-    Stock getStockById(Long id);
-    List <Stock> getAllStocks();
-    void deactivateStock(Long id);
+    UserPortfolio createPortfolio( UserPortfolio portfolio);
+     UserPortfolio updatePortfolio(Long id, UserPortfolio portfolio);
+     UserPortfolio getPortfolioById(Long id);
+     UserPortfolio getPortfolioByUser(Long userId);
+     void deactivatePortfolio(Long id);
 
 
 }
