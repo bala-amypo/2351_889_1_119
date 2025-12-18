@@ -1,6 +1,7 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import java.time.*;
 public class Stockentity{
     @Id
     private Long id;
