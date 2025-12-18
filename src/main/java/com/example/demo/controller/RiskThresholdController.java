@@ -1,12 +1,13 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import com.example.demo.model.RiskThreshold;
 import com.example.demo.service.RiskThresholdService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/riskThreshold")
+@RequestMapping("/risk-thresholds")
 public class RiskThresholdController {
 
     private final RiskThresholdService riskThresholdService;
@@ -15,18 +16,23 @@ public class RiskThresholdController {
         this.riskThresholdService = riskThresholdService;
     }
 
-    @GetMapping
-    public List<RiskThreshold> getAllThresholds() {
-        return riskThresholdService.getAllThresholds();
-    }
-
     @PostMapping
-    public RiskThreshold createThreshold(@RequestBody RiskThreshold threshold) {
+    public RiskThreshold create(@RequestBody RiskThreshold threshold) {
         return riskThresholdService.createThreshold(threshold);
     }
 
-    @PutMapping("/{id}")
-    public RiskThreshold updateThreshold(@PathVariable Long id, @RequestBody RiskThreshold threshold) {
-        return riskThresholdService.updateThreshold(id, threshold); // Fixed method
+    @GetMapping("/{id}")
+    public RiskThreshold getById(@PathVariable Long id) {
+        return riskThresholdService.getThresholdById(id);
+    }
+
+    @GetMapping
+    public List<RiskThreshold> getAll() {
+        return riskThresholdService.getAllThresholds();
+    }
+
+    @GetMapping("/active")
+    public RiskThreshold getActive() {
+        return riskThresholdService.getActiveThreshold();
     }
 }

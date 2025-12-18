@@ -1,4 +1,4 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.serviceimpl;
 
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.repository.RiskAnalysisResultRepository;
@@ -17,14 +17,8 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
     }
 
     @Override
-    public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
-        return new RiskAnalysisResult(); // logic added later
-    }
-
-    @Override
     public RiskAnalysisResult getAnalysisById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not found"));
+        return repository.findById(id).orElse(null);
     }
 
     @Override
