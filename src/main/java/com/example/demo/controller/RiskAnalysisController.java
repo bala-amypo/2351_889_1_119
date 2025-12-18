@@ -1,34 +1,27 @@
 package com.example.demo.controller;
-import com.example.demo.model.RiskAnalysisResult;
-import com.example.demo.service.RiskAnalysisService;
+
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
+import com.example.demo.model.RiskAnalysis;
+import com.example.demo.service.RiskAnalysisService;
 
 @RestController
-@RequestMapping("/risk-analysis")
+@RequestMapping("/riskAnalysis")
 public class RiskAnalysisController {
 
-    private final cService riskAnalysisService;
+    private final RiskAnalysisService riskAnalysisService;  // Fixed type
 
     public RiskAnalysisController(RiskAnalysisService riskAnalysisService) {
         this.riskAnalysisService = riskAnalysisService;
     }
 
-    @PostMapping("/{portfolioId}")
-    public RiskAnalysisResult analyzePortfolio(
-            @PathVariable Long portfolioId) {
-        return riskAnalysisService.analyzePortfolio(portfolioId);
+    @GetMapping
+    public List<RiskAnalysis> getAllAnalyses() {
+        return riskAnalysisService.getAllAnalyses();
     }
 
-    @GetMapping("/{id}")
-    public RiskAnalysisResult getAnalysisById(@PathVariable Long id) {
-        return riskAnalysisService.getAnalysisById(id);
-    }
-
-    @GetMapping("/portfolio/{portfolioId}")
-    public List<RiskAnalysisResult> getAnalysesForPortfolio(
-            @PathVariable Long portfolioId) {
-        return riskAnalysisService.getAnalysesForPortfolio(portfolioId);
+    @PostMapping
+    public RiskAnalysis createAnalysis(@RequestBody RiskAnalysis analysis) {
+        return riskAnalysisService.createAnalysis(analysis);
     }
 }

@@ -1,50 +1,30 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
-public class PortfolioHolding implements Serializable {
+public class UserPortfolio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private BigDecimal amount;      // Fixed type
-    private BigDecimal price;       // Fixed type
+    private String portfolioName;
 
-    // getters and setters
-    public Long getId() {
-        return id;
-    }
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getPortfolioName() { return portfolioName; }
+    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public LocalDate getStartDate() { return startDate; }
+    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
 
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+    public LocalDate getEndDate() { return endDate; }
+    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
 }

@@ -1,29 +1,38 @@
 package com.example.demo.model;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 
-public class UserPortfolio{
+import jakarta.persistence.*;  // For @Entity, @Id, etc.
+import java.time.LocalDate;    // Correct import for LocalDate
+
+@Entity
+@Table(name = "user_portfolio")
+public class UserPortfolio {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private String portfolio;
-    private boolean active;
-    private LocalDate Timestamp;
-    private LocalDate updatedAt;
-    public UserPortfolio(Long id, Long userId, String portfolio, boolean active, localdate timestamp,
-            localdate updatedAt) {
-        this.id = id;
-        this.userId = userId;
-        this.portfolio = portfolio;
-        this.active = active;
-        Timestamp = timestamp;
-        this.updatedAt = updatedAt;
+
+    @Column(name = "portfolio_name", nullable = false)
+    private String portfolioName;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;   // Fixed type
+
+    @Column(name = "end_date")
+    private LocalDate endDate;     // Fixed type
+
+    @Column(name = "active")
+    private boolean active = true; // Optional field to track deactivation
+
+    // Constructors
+    public UserPortfolio() {}
+
+    public UserPortfolio(String portfolioName, LocalDate startDate, LocalDate endDate) {
+        this.portfolioName = portfolioName;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public UserPortfolio() {
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -32,20 +41,28 @@ public class UserPortfolio{
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getPortfolioName() {
+        return portfolioName;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setPortfolioName(String portfolioName) {
+        this.portfolioName = portfolioName;
     }
 
-    public String getPortfolio() {
-        return portfolio;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setPortfolio(String portfolio) {
-        this.portfolio = portfolio;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public boolean isActive() {
@@ -56,20 +73,8 @@ public class UserPortfolio{
         this.active = active;
     }
 
-    public localdate getTimestamp() {
-        return Timestamp;
+    // Optional: convenience method to deactivate portfolio
+    public void deactivate() {
+        this.active = false;
     }
-
-    public void setTimestamp(localdate Timestamp) {
-        this.Timestamp = Timestamp;
-    }
-
-    public localdate getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(localdate updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
 }
