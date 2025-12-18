@@ -1,9 +1,10 @@
 package com.example.demo.model;
 import jakarta.persistence.*;
 public class RiskThreshold{
+    @Id
     private Long id;
-    private Double quantity;
+    private String thresholdName;
     private Decimal marketValue;
-    private localdate lastUpdated;
-
+   
+   private boolean active
 }
