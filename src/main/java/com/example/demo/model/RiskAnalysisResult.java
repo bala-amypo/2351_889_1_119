@@ -7,6 +7,7 @@ public class RiskAnalysisResult{
     private localdate analysis;
     private Double highestStockPercentage;
     private Double highestSectorPercentage;
-    private boolean 
+    private boolean isHighRisk;
+    private String notes;
 
 }
