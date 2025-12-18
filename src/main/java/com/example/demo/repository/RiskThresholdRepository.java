@@ -1,8 +1,9 @@
-import org.springframework.data.jpa.repository.JpaRepository;
 package com.example.demo.repository;
-import com.example.demo.model.RiskThreshold;
 
-@Repository
-public interface RiskThresholdRepository extends JpaRepository<RiskThreshold,Long>{
-    
+import com.example.demo.model.RiskThreshold;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RiskThresholdRepository extends JpaRepository<RiskThreshold, Long> {
+
+    RiskThreshold findByActiveTrue();
 }
