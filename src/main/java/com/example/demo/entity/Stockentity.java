@@ -3,7 +3,7 @@ package com.example.demo.entity;
 public class Stockentity{
     @Id
     private int id;
-    @
+    @column(ticker=unique)
     private String ticker;
     private String companyname;
     private String sector;
