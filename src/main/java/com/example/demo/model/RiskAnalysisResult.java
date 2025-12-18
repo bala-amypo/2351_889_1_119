@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class RiskAnalysisResult{
     @Id
     private Long id;
-    @column(unique=true)
+    @Column(unique=true)
     private LocalDate analysis;
     private Double highestStockPercentage;
     private Double highestSectorPercentage;

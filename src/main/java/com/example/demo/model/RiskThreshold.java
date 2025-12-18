@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 public class RiskThreshold{
     @Id
     private Long id;
-    @column(unique=true)
+    @Column(unique=true)
     private String thresholdName;
     @Size(min=0,max=100)
     private Double maxSingleStockPercentage;
