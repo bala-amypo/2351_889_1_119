@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
 public class Stockentity{
-    
+    @Id
     private int id;
+    @
     private String ticker;
     private String companyname;
     private String sector;
     private boolean active;
+
     public Stockentity(int id, String ticker, String companyname, String sector, boolean active) {
         this.id = id;
         this.ticker = ticker;
