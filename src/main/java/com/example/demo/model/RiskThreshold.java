@@ -1,68 +1,32 @@
 package com.example.demo.model;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import java.time.LocalDate;
 
+@Entity
+@Table(name = "risk_threshold")
+public class RiskThreshold {
 
-public class RiskThreshold{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
-    private String thresholdName;
-    @Size(min=0,max=100)
-    private Double maxSingleStockPercentage;
-    @Size(min=0,max=100)
-    private Double maxSectorPercentage;
-    private boolean active;
-    public RiskThreshold(Long id, String thresholdName, Double maxSingleStockPercentage, Double maxSectorPercentage,
-            boolean active) {
-        this.id = id;
-        this.thresholdName = thresholdName;
-        this.maxSingleStockPercentage = maxSingleStockPercentage;
-        this.maxSectorPercentage = maxSectorPercentage;
-        this.active = active;
+
+    private String name;
+    private Double value;
+
+    public RiskThreshold() {}
+
+    public RiskThreshold(String name, Double value) {
+        this.name = name;
+        this.value = value;
     }
 
-    public RiskThreshold() {
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Long getId() {
-        return id;
-    }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getThresholdName() {
-        return thresholdName;
-    }
-
-    public void setThresholdName(String thresholdName) {
-        this.thresholdName = thresholdName;
-    }
-
-    public Double getMaxSingleStockPercentage() {
-        return maxSingleStockPercentage;
-    }
-
-    public void setMaxSingleStockPercentage(Double maxSingleStockPercentage) {
-        this.maxSingleStockPercentage = maxSingleStockPercentage;
-    }
-
-    public Double getMaxSectorPercentage() {
-        return maxSectorPercentage;
-    }
-
-    public void setMaxSectorPercentage(Double maxSectorPercentage) {
-        this.maxSectorPercentage = maxSectorPercentage;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
+    public Double getValue() { return value; }
+    public void setValue(Double value) { this.value = value; }
 }
