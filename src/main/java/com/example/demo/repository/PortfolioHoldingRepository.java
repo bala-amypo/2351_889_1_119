@@ -1,4 +1,4 @@
-package com.example.demo.repository;
+package com.example.demo.model;
 
 import com.example.demo.model.PortfolioHolding;
 import org.springframework.data.jpa.repository.JpaRepository;
