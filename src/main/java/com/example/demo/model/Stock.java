@@ -1,53 +1,53 @@
 package com.example.demo.model;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import java.time.*;
-public class Stockentity{
-    @Id
-    private Long id;
-    @column(unique=true)
-    private String ticker;
-    private String companyname;
-    private String sector;
-    private boolean active;
 
-    public Stock(Long id, String ticker, String companyname, String sector, boolean active) {
-        this.id = id;
-        this.ticker = ticker;
-        this.companyname = companyname;
-        this.sector = sector;
-        this.active = active;
-    }
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "stocks")
+public class Stock {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String ticker;
+    private String companyName;
+    private Boolean active = true;
+
     public Stock() {
     }
+
+    
+
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getTicker() {
         return ticker;
     }
+
     public void setTicker(String ticker) {
         this.ticker = ticker;
     }
-    public String getCompanyname() {
-        return companyname;
+
+    public String getCompanyName() {
+        return companyName;
     }
-    public void setCompanyname(String companyname) {
-        this.companyname = companyname;
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
-    public String getSector() {
-        return sector;
-    }
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-    public boolean isActive() {
+
+    public Boolean getActive() {
         return active;
     }
-    public void setActive(boolean active) {
+
+    public void setActive(Boolean active) {
         this.active = active;
     }
 }
