@@ -1,4 +1,9 @@
 package com.example.demo.controller;
+import com.example.demo.model.UserPortfolio;
+import com.example.demo.service.UserPortfolioService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/portfolios")

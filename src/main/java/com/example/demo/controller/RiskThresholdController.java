@@ -1,4 +1,7 @@
 package com.example.demo.controller;
+import com.example.demo.model.RiskThresholdt;
+import com.example.demo.service.RiskThresholdService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/risk-thresholds")
