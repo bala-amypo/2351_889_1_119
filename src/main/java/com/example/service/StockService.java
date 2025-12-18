@@ -1,2 +1,6 @@
 import java.util.*;
-public interface 
+public interface StockService{
+    Stockentity savedata(Stockentity st);
+    Stockentity getidval(int id);
+    
+}
