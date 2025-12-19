@@ -6,5 +6,4 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user-portfolios")
 public class UserPortfolioController {
 
-    // your existing code here
 }
