@@ -1,3 +1,4 @@
+
 package com.example.demo.service.impl;
 
 import com.example.demo.model.User;
@@ -12,6 +13,11 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User registerUser(User user) {
+        return userRepository.save(user);   // ✅ IMPLEMENTED
     }
 
     @Override
