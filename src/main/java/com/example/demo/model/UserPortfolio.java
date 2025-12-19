@@ -1,45 +1,49 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDate;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "user_portfolio")
 public class UserPortfolio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String portfolioName;
+    private Long userId;   // ✅ ADD THIS
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String assetName;
+    private double quantity;
 
-    private boolean active = true; // Track deactivation
-
-    // Constructors
     public UserPortfolio() {}
 
-    public UserPortfolio(String portfolioName, LocalDate startDate, LocalDate endDate) {
-        this.portfolioName = portfolioName;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Long getId() {
+        return id;
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getUserId() {
+        return userId;
+    }
 
-    public String getPortfolioName() { return portfolioName; }
-    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-    public LocalDate getStartDate() { return startDate; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
+    public String getAssetName() {
+        return assetName;
+    }
 
-    public LocalDate getEndDate() { return endDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
 
-    public boolean isActive() { return active; }
-    public void setActive(boolean active) { this.active = active; }
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
 }
