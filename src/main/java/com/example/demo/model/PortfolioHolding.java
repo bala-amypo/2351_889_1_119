@@ -1,40 +1,50 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.math.BigDecimal;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "portfolio_holding")
 public class PortfolioHolding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    // ✅ THIS FIELD WAS MISSING
+    private Long portfolioId;
 
-    private BigDecimal amount;
-    private BigDecimal price;
+    private String assetName;
+    private double quantity;
 
-    // Constructors
     public PortfolioHolding() {}
 
-    public PortfolioHolding(String name, BigDecimal amount, BigDecimal price) {
-        this.name = name;
-        this.amount = amount;
-        this.price = price;
+    public Long getId() {
+        return id;
     }
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getPortfolioId() {
+        return portfolioId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setPortfolioId(Long portfolioId) {
+        this.portfolioId = portfolioId;
+    }
 
-    public BigDecimal getAmount() { return amount; }
-    public void setAmount(BigDecimal amount) { this.amount = amount; }
+    public String getAssetName() {
+        return assetName;
+    }
 
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
 }
