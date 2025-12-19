@@ -1,28 +1,55 @@
-package com.example.demo.service.serviceimpl;
-
-import com.example.demo.model.RiskAnalysisResult;
-import com.example.demo.repository.RiskAnalysisResultRepository;
-import com.example.demo.service.RiskAnalysisService;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 @Service
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
-    private final RiskAnalysisResultRepository repository;
+    private final PortfolioHoldingRepository holdingRepo;
+    private final RiskThresholdRepository thresholdRepo;
+    private final RiskAnalysisResultRepository analysisRepo;
+    private final UserPortfolioRepository portfolioRepo;
 
-    public RiskAnalysisServiceImpl(RiskAnalysisResultRepository repository) {
-        this.repository = repository;
+    public RiskAnalysisServiceImpl(
+        PortfolioHoldingRepository holdingRepo,
+        RiskThresholdRepository thresholdRepo,
+        RiskAnalysisResultRepository analysisRepo,
+        UserPortfolioRepository portfolioRepo
+    ) {
+        this.holdingRepo = holdingRepo;
+        this.thresholdRepo = thresholdRepo;
+        this.analysisRepo = analysisRepo;
+        this.portfolioRepo = portfolioRepo;
     }
 
     @Override
-    public RiskAnalysisResult getAnalysisById(Long id) {
-        return repository.findById(id).orElse(null);
+    public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
+
+        UserPortfolio portfolio = portfolioRepo.findById(portfolioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
+
+        List<PortfolioHolding> holdings = holdingRepo.findByPortfolioId(portfolioId);
+        RiskThreshold threshold = thresholdRepo.findByPortfolioId(portfolioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
+
+        BigDecimal total = holdings.stream()
+                .map(PortfolioHolding::getMarketValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        double highest = holdings.stream()
+                .mapToDouble(h ->
+                        h.getMarketValue().doubleValue() / total.doubleValue() * 100)
+                .max().orElse(0);
+
+        boolean highRisk = highest > threshold.getMaxSingleStockPercentage();
+
+        RiskAnalysisResult result = new RiskAnalysisResult();
+        result.setPortfolio(portfolio);
+        result.setAnalysisDate(LocalDateTime.now());
+        result.setHighestStockPercentage(highest);
+        result.setIsHighRisk(highRisk);
+
+        return analysisRepo.save(result);
     }
 
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
-        return repository.findByPortfolioId(portfolioId);
+        return analysisRepo.findByPortfolioId(portfolioId);
     }
 }
