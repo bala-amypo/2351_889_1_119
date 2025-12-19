@@ -7,5 +7,7 @@ public interface PortfolioHoldingService {
 
     PortfolioHolding save(PortfolioHolding holding);
 
+    List<PortfolioHolding> getAllHoldings();
+
     List<PortfolioHolding> getByPortfolioId(Long portfolioId);
 }

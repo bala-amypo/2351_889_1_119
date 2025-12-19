@@ -24,6 +24,11 @@ public class PortfolioHoldingServiceImpl
     }
 
     @Override
+    public List<PortfolioHolding> getAllHoldings() {
+        return repository.findAll();
+    }
+
+    @Override
     public List<PortfolioHolding> getByPortfolioId(Long portfolioId) {
         return repository.findByPortfolioId(portfolioId);
     }

@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.service.PortfolioHoldingService;
 
@@ -15,26 +17,23 @@ public class PortfolioHoldingController {
         this.holdingService = holdingService;
     }
 
+    // CREATE
     @PostMapping
-    public PortfolioHolding createHolding(@RequestBody PortfolioHolding holding) {
-        return holdingService.addHolding(holding);  // Matches service interface
+    public PortfolioHolding addHolding(
+            @RequestBody PortfolioHolding holding) {
+        return holdingService.save(holding);
     }
 
-    @GetMapping("/{id}")
-    public PortfolioHolding getHoldingById(@PathVariable Long id) {
-        return holdingService.getAllHoldings()
-                             .stream()
-                             .filter(h -> h.getId().equals(id))
-                             .findFirst()
-                             .orElse(null);
+    // READ ALL
+    @GetMapping
+    public List<PortfolioHolding> getAllHoldings() {
+        return holdingService.getAllHoldings();
     }
 
+    // READ BY PORTFOLIO ID
     @GetMapping("/portfolio/{portfolioId}")
-    public List<PortfolioHolding> getHoldingsByPortfolio(@PathVariable Long portfolioId) {
-        // Example filter, assuming portfolioId field exists
-        return holdingService.getAllHoldings()
-                             .stream()
-                             .filter(h -> h.getId().equals(portfolioId))
-                             .toList();
+    public List<PortfolioHolding> getByPortfolioId(
+            @PathVariable Long portfolioId) {
+        return holdingService.getByPortfolioId(portfolioId);
     }
 }
