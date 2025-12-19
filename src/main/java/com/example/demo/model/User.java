@@ -1,9 +1,9 @@
+
 package com.example.demo.model;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
 public class User {
 
     @Id
@@ -11,24 +11,7 @@ public class User {
     private Long id;
 
     private String email;
-    private String name;
+    private String password;
 
-    public User() {}
-
-    public User(String email, String name) {
-        this.email = email;
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
+    // getters + setters
 }
