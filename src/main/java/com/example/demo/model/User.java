@@ -17,6 +17,10 @@ public class User {
     public Long getId() {
         return id;
     }
+    public String getRole() {
+    return role;
+}
+
 
     public void setId(Long id) {
         this.id = id;
