@@ -1,47 +1,51 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
-@Table(name = "portfolio_holdings")
 public class PortfolioHolding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String assetName;
+    private double amount;
+
     @ManyToOne
+    @JoinColumn(name = "portfolio_id")
     private UserPortfolio portfolio;
 
-    @ManyToOne
-    private Stock stock;
-
-    private Double quantity;
-
-    private BigDecimal marketValue;
-
-    public PortfolioHolding() {}
-
-    public PortfolioHolding(UserPortfolio portfolio, Stock stock,
-                            Double quantity, BigDecimal marketValue) {
-        this.portfolio = portfolio;
-        this.stock = stock;
-        this.quantity = quantity;
-        this.marketValue = marketValue;
+    // ===== Getters & Setters =====
+    public Long getId() {
+        return id;
     }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public UserPortfolio getPortfolio() {
+        return portfolio;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public void setPortfolio(UserPortfolio portfolio) {
-    this.portfolio = portfolio;
-}
-
-public void setStock(Stock stock) {
-    this.stock = stock;
-}
-
-
-    public Long getId() { return id; }
-    public UserPortfolio getPortfolio() { return portfolio; }
-    public Stock getStock() { return stock; }
-    public Double getQuantity() { return quantity; }
-    public BigDecimal getMarketValue() { return marketValue; }
+        this.portfolio = portfolio;
+    }
 }
