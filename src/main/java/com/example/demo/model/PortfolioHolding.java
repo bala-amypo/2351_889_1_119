@@ -9,24 +9,32 @@ public class PortfolioHolding {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String assetName;
-    private double amount;
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
+
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
     private UserPortfolio portfolio;
+
+    // ===== BUSINESS METHOD =====
+    public double getMarketValue() {
+        return stock.getPrice() * quantity;
+    }
 
     // ===== Getters & Setters =====
     public Long getId() {
         return id;
     }
 
-    public String getAssetName() {
-        return assetName;
+    public Stock getStock() {
+        return stock;
     }
 
-    public double getAmount() {
-        return amount;
+    public int getQuantity() {
+        return quantity;
     }
 
     public UserPortfolio getPortfolio() {
@@ -37,12 +45,12 @@ public class PortfolioHolding {
         this.id = id;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public void setPortfolio(UserPortfolio portfolio) {

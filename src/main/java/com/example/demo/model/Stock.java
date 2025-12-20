@@ -1,55 +1,39 @@
 package com.example.demo.model;
-import jakarta.validation.constraints.*;
-import java.time.LocalDate;
+
 import jakarta.persistence.*;
 
-
 @Entity
-@Table(name = "stocks")
 public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ticker;
-    private String companyName;
-    private Boolean active = true;
+    private String symbol;
+    private double price;
 
-    public Stock() {
-    }
-
-    
-
+    // ===== Getters & Setters =====
     public Long getId() {
         return id;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getTicker() {
-        return ticker;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

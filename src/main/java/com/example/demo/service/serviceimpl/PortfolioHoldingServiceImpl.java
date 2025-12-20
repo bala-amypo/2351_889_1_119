@@ -1,12 +1,7 @@
 package com.example.demo.service.serviceimpl;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.PortfolioHolding;
-import com.example.demo.model.Stock;
-import com.example.demo.model.UserPortfolio;
+import com.example.demo.model.*;
 import com.example.demo.repository.PortfolioHoldingRepository;
-import com.example.demo.repository.StockRepository;
-import com.example.demo.repository.UserPortfolioRepository;
 import com.example.demo.service.PortfolioHoldingService;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +10,25 @@ import java.util.List;
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
-    private final PortfolioHoldingRepository holdingRepo;
-    private final UserPortfolioRepository portfolioRepo;
-    private final StockRepository stockRepo;
+    private final PortfolioHoldingRepository repository;
 
-    public PortfolioHoldingServiceImpl(
-            PortfolioHoldingRepository holdingRepo,
-            UserPortfolioRepository portfolioRepo,
-            StockRepository stockRepo) {
-        this.holdingRepo = holdingRepo;
-        this.portfolioRepo = portfolioRepo;
-        this.stockRepo = stockRepo;
+    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding) {
+    public PortfolioHolding addHolding(UserPortfolio portfolio, Stock stock, int quantity) {
 
-        UserPortfolio portfolio = portfolioRepo.findById(portfolioId)
-                .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
-
-        Stock stock = stockRepo.findById(stockId)
-                .orElseThrow(() -> new ResourceNotFoundException("Stock not found"));
-
+        PortfolioHolding holding = new PortfolioHolding();
         holding.setPortfolio(portfolio);
         holding.setStock(stock);
+        holding.setQuantity(quantity);
 
-        return holdingRepo.save(holding);
+        return repository.save(holding);
     }
 
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return holdingRepo.findByPortfolioId(portfolioId);
+        return repository.findByPortfolioId(portfolioId);
     }
 }
