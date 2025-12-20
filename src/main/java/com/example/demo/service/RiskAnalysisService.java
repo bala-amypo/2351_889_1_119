@@ -1,12 +1,10 @@
 package com.example.demo.service;
 
-import com.example.demo.model.RiskAnalysisResult;
-
-import java.util.List;
+import com.example.demo.model.UserPortfolio;
 
 public interface RiskAnalysisService {
 
-    RiskAnalysisResult analyzePortfolio(Long portfolioId);
+    double calculateTotalValue(UserPortfolio portfolio);
 
-    List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId);
+    String getAnalysesForPortfolio(Long portfolioId);
 }

@@ -11,6 +11,7 @@ public class Stock {
 
     private String symbol;
     private double price;
+    private boolean active;
 
     // ===== Getters & Setters =====
     public Long getId() {
@@ -25,6 +26,10 @@ public class Stock {
         return price;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -35,5 +40,9 @@ public class Stock {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
