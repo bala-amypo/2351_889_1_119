@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import com.example.demo.model.PortfolioHolding;
+import com.example.demo.service.PortfolioHoldingService;
 
 @RestController
 @RequestMapping("/api/holdings")

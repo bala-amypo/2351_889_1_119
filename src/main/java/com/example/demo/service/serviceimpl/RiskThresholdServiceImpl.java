@@ -1,33 +1,37 @@
+package com.example.demo.service.serviceimpl;
+
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.RiskThreshold;
+import com.example.demo.model.UserPortfolio;
+import com.example.demo.repository.RiskThresholdRepository;
+import com.example.demo.repository.UserPortfolioRepository;
+import com.example.demo.service.RiskThresholdService;
+import org.springframework.stereotype.Service;
+
 @Service
 public class RiskThresholdServiceImpl implements RiskThresholdService {
 
-    private final RiskThresholdRepository repo;
+    private final RiskThresholdRepository thresholdRepo;
     private final UserPortfolioRepository portfolioRepo;
 
-    public RiskThresholdServiceImpl(RiskThresholdRepository repo,
+    public RiskThresholdServiceImpl(RiskThresholdRepository thresholdRepo,
                                     UserPortfolioRepository portfolioRepo) {
-        this.repo = repo;
+        this.thresholdRepo = thresholdRepo;
         this.portfolioRepo = portfolioRepo;
     }
 
     @Override
     public RiskThreshold setThreshold(Long portfolioId, RiskThreshold threshold) {
-
-        if (threshold.getMaxSingleStockPercentage() < 0 ||
-            threshold.getMaxSingleStockPercentage() > 100) {
-            throw new IllegalArgumentException("Max single stock percentage must be between 0 and 100");
-        }
-
         UserPortfolio portfolio = portfolioRepo.findById(portfolioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
 
         threshold.setPortfolio(portfolio);
-        return repo.save(threshold);
+        return thresholdRepo.save(threshold);
     }
 
     @Override
     public RiskThreshold getThresholdForPortfolio(Long portfolioId) {
-        return repo.findByPortfolioId(portfolioId)
-                .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
+        return thresholdRepo.findByPortfolioId(portfolioId)
+                .orElseThrow(() -> new ResourceNotFoundException("Threshold not found"));
     }
 }

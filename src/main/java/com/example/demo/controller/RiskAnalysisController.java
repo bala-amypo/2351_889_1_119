@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.service.RiskAnalysisService;
 import org.springframework.web.bind.annotation.*;
