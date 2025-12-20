@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface PortfolioHoldingService {
 
-    PortfolioHolding addHolding(PortfolioHolding holding);
+    PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding);
 
-    List<PortfolioHolding> getAllHoldings();
+    List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId);
 }

@@ -10,10 +10,23 @@ public class RiskThreshold {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double maxRisk;
-
     @ManyToOne
     private UserPortfolio portfolio;
 
-    // getters & setters
+    private Double maxSingleStockPercentage;
+    private Double maxOverallVolatility;
+
+    public RiskThreshold() {}
+
+    public RiskThreshold(UserPortfolio portfolio,
+                         Double maxSingleStockPercentage,
+                         Double maxOverallVolatility) {
+        this.portfolio = portfolio;
+        this.maxSingleStockPercentage = maxSingleStockPercentage;
+        this.maxOverallVolatility = maxOverallVolatility;
+    }
+
+    public Double getMaxSingleStockPercentage() {
+        return maxSingleStockPercentage;
+    }
 }

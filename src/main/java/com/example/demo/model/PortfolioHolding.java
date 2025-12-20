@@ -1,50 +1,39 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
+@Table(name = "portfolio_holdings")
 public class PortfolioHolding {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ THIS FIELD WAS MISSING
-    private Long portfolioId;
+    @ManyToOne
+    private UserPortfolio portfolio;
 
-    private String assetName;
-    private double quantity;
+    @ManyToOne
+    private Stock stock;
+
+    private Double quantity;
+
+    private BigDecimal marketValue;
 
     public PortfolioHolding() {}
 
-    public Long getId() {
-        return id;
-    }
-
-    public Long getPortfolioId() {
-        return portfolioId;
-    }
-
-    public void setPortfolioId(Long portfolioId) {
-        this.portfolioId = portfolioId;
-    }
-
-    public String getAssetName() {
-        return assetName;
-    }
-
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
+    public PortfolioHolding(UserPortfolio portfolio, Stock stock,
+                            Double quantity, BigDecimal marketValue) {
+        this.portfolio = portfolio;
+        this.stock = stock;
         this.quantity = quantity;
+        this.marketValue = marketValue;
     }
+
+    public Long getId() { return id; }
+    public UserPortfolio getPortfolio() { return portfolio; }
+    public Stock getStock() { return stock; }
+    public Double getQuantity() { return quantity; }
+    public BigDecimal getMarketValue() { return marketValue; }
 }
