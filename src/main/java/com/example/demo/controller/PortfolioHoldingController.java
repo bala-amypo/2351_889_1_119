@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.service.PortfolioHoldingService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/holdings")
@@ -15,13 +16,17 @@ public class PortfolioHoldingController {
         this.holdingService = holdingService;
     }
 
-    @PostMapping
-    public PortfolioHolding add(@RequestBody PortfolioHolding holding) {
-        return holdingService.addHolding(holding);
+    @PostMapping("/portfolio/{portfolioId}/stock/{stockId}")
+    public PortfolioHolding addHolding(
+            @PathVariable Long portfolioId,
+            @PathVariable Long stockId,
+            @RequestBody PortfolioHolding holding) {
+
+        return holdingService.addHolding(portfolioId, stockId, holding);
     }
 
-    @GetMapping
-    public List<PortfolioHolding> getAll() {
-        return holdingService.getAllHoldings();
+    @GetMapping("/portfolio/{portfolioId}")
+    public List<PortfolioHolding> getHoldings(@PathVariable Long portfolioId) {
+        return holdingService.getHoldingsByPortfolio(portfolioId);
     }
 }

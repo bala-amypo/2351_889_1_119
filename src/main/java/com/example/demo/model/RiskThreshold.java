@@ -25,6 +25,10 @@ public class RiskThreshold {
         this.maxSingleStockPercentage = maxSingleStockPercentage;
         this.maxOverallVolatility = maxOverallVolatility;
     }
+    public void setPortfolio(UserPortfolio portfolio) {
+    this.portfolio = portfolio;
+}
+
 
     public Double getMaxSingleStockPercentage() {
         return maxSingleStockPercentage;
