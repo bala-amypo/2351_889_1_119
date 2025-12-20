@@ -11,8 +11,12 @@ public class UserPortfolio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+     private User user;
 
-    private Long userId;   // ✅ ADD THIS
+
+    private Long userId; 
 
     private String assetName;
     private double quantity;
