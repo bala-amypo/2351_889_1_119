@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.service.RiskAnalysisService;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/risk-analysis")
+@RequestMapping("/api/risk-analysis")
 public class RiskAnalysisController {
 
     private final RiskAnalysisService riskAnalysisService;
@@ -17,13 +16,13 @@ public class RiskAnalysisController {
         this.riskAnalysisService = riskAnalysisService;
     }
 
-    @GetMapping("/{id}")
-    public RiskAnalysisResult getAnalysisById(@PathVariable Long id) {
-        return riskAnalysisService.getAnalysisById(id);
+    @PostMapping("/portfolio/{portfolioId}")
+    public RiskAnalysisResult analyze(@PathVariable Long portfolioId) {
+        return riskAnalysisService.analyzePortfolio(portfolioId);
     }
 
     @GetMapping("/portfolio/{portfolioId}")
-    public List<RiskAnalysisResult> getByPortfolio(@PathVariable Long portfolioId) {
+    public List<RiskAnalysisResult> getAnalyses(@PathVariable Long portfolioId) {
         return riskAnalysisService.getAnalysesForPortfolio(portfolioId);
     }
 }

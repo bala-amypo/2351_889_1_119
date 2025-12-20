@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-
 import com.example.demo.model.RiskThreshold;
 import com.example.demo.service.RiskThresholdService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/risk-threshold")
+@RequestMapping("/api/risk-threshold")
 public class RiskThresholdController {
 
     private final RiskThresholdService service;
@@ -15,13 +14,15 @@ public class RiskThresholdController {
         this.service = service;
     }
 
-    @GetMapping("/active")
-    public RiskThreshold getActive() {
-        return service.getActiveThreshold();
+    @PostMapping("/portfolio/{portfolioId}")
+    public RiskThreshold setThreshold(
+            @PathVariable Long portfolioId,
+            @RequestBody RiskThreshold threshold) {
+        return service.setThreshold(portfolioId, threshold);
     }
 
-    @PostMapping
-    public RiskThreshold save(@RequestBody RiskThreshold riskThreshold) {
-        return service.save(riskThreshold);
+    @GetMapping("/portfolio/{portfolioId}")
+    public RiskThreshold getThreshold(@PathVariable Long portfolioId) {
+        return service.getThresholdForPortfolio(portfolioId);
     }
 }
