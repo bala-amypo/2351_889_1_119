@@ -10,23 +10,16 @@ import java.util.List;
 @RequestMapping("/api/holdings")
 public class PortfolioHoldingController {
 
-    private final PortfolioHoldingService holdingService;
+    private final PortfolioHoldingService portfolioHoldingService;
 
-    public PortfolioHoldingController(PortfolioHoldingService holdingService) {
-        this.holdingService = holdingService;
-    }
-
-    @PostMapping("/portfolio/{portfolioId}/stock/{stockId}")
-    public PortfolioHolding addHolding(
-            @PathVariable Long portfolioId,
-            @PathVariable Long stockId,
-            @RequestBody PortfolioHolding holding) {
-
-        return holdingService.addHolding(portfolioId, stockId, holding);
+    public PortfolioHoldingController(PortfolioHoldingService portfolioHoldingService) {
+        this.portfolioHoldingService = portfolioHoldingService;
     }
 
     @GetMapping("/portfolio/{portfolioId}")
-    public List<PortfolioHolding> getHoldings(@PathVariable Long portfolioId) {
-        return holdingService.getHoldingsByPortfolio(portfolioId);
+    public List<PortfolioHolding> getHoldingsByPortfolio(
+            @PathVariable Long portfolioId) {
+
+        return portfolioHoldingService.getHoldingsByPortfolio(portfolioId);
     }
 }
