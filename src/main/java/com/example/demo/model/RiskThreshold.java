@@ -1,3 +1,7 @@
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "risk_thresholds")
 public class RiskThreshold {
@@ -6,9 +10,10 @@ public class RiskThreshold {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Double maxRisk;
+
     @ManyToOne
     private UserPortfolio portfolio;
 
-    private Double maxSingleStockPercentage;
-    private Double maxOverallVolatility;
+    // getters & setters
 }
