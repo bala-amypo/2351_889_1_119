@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import java.util.List;
 
 @Entity
 public class UserPortfolio {
@@ -11,43 +14,35 @@ public class UserPortfolio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String portfolioName;
+
     @ManyToOne
-    @JoinColumn(name = "user_id")
-     private User user;
+    @JoinColumn(name = "user_id") // foreign key column
+    private User user;
 
-
-    private Long userId; 
-
-    private String assetName;
-    private double quantity;
-
-    public UserPortfolio() {}
-
+    // getters and setters
     public Long getId() {
         return id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public String getPortfolioName() {
+        return portfolioName;
     }
 
-    public String getAssetName() {
-        return assetName;
+    public void setPortfolioName(String portfolioName) {
+        this.portfolioName = portfolioName;
     }
 
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
+    public User getUser() {
+        return user;
     }
 
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
