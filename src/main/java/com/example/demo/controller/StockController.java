@@ -1,13 +1,21 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Stock;
-import com.example.demo.service.StockService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.model.Stock;
+import com.example.demo.service.StockService;
+
 @RestController
-@RequestMapping("/stocks")
+@RequestMapping("/api/stocks")
 public class StockController {
 
     private final StockService stockService;
@@ -16,28 +24,33 @@ public class StockController {
         this.stockService = stockService;
     }
 
+    // POST /api/stocks
     @PostMapping
     public Stock createStock(@RequestBody Stock stock) {
         return stockService.createStock(stock);
     }
 
+    // PUT /api/stocks/{id}
     @PutMapping("/{id}")
     public Stock updateStock(@PathVariable Long id,
                              @RequestBody Stock stock) {
         return stockService.updateStock(id, stock);
     }
 
+    // GET /api/stocks/{id}
     @GetMapping("/{id}")
     public Stock getStockById(@PathVariable Long id) {
         return stockService.getStockById(id);
     }
 
+    // GET /api/stocks
     @GetMapping
     public List<Stock> getAllStocks() {
         return stockService.getAllStocks();
     }
 
-    @DeleteMapping("/{id}")
+    // PATCH /api/stocks/{id}/deactivate
+    @PatchMapping("/{id}/deactivate")
     public void deactivateStock(@PathVariable Long id) {
         stockService.deactivateStock(id);
     }
