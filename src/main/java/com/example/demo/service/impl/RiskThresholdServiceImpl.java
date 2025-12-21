@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -58,11 +60,6 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     public RiskThreshold getThresholdById(Long id) {
         return thresholdRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Risk threshold not found"));
-    }
-
-    @Override
-    public List<RiskThreshold> getAllThresholds() {
-        return thresholdRepository.findAll();
     }
 
     @Override
