@@ -53,4 +53,32 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
         return holdingRepository.findByPortfolioId(portfolioId);
     }
+
+    @Override
+    public PortfolioHolding getHoldingById(Long id) {
+        return holdingRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Holding not found"));
+    }
+
+    @Override
+    public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
+        PortfolioHolding existing = getHoldingById(id);
+
+        if (holding.getQuantity() <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+        if (holding.getMarketValue().signum() < 0) {
+            throw new IllegalArgumentException("Market value must be non-negative");
+        }
+
+        existing.setQuantity(holding.getQuantity());
+        existing.setMarketValue(holding.getMarketValue());
+        return holdingRepository.save(existing);
+    }
+
+    @Override
+    public void deleteHolding(Long id) {
+        PortfolioHolding holding = getHoldingById(id);
+        holdingRepository.delete(holding);
+    }
 }

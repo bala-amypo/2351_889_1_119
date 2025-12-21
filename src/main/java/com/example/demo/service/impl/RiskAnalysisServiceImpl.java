@@ -73,4 +73,11 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
         return analysisRepo.findByPortfolioId(portfolioId);
     }
+
+    @Override
+public RiskAnalysisResult getAnalysisById(Long id) {
+return analysisRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Analysis not found"));
+}
+
 }

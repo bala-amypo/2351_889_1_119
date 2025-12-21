@@ -54,4 +54,23 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
         return thresholdRepository.findAll();
     }
 
+    @Override
+    public RiskThreshold getThresholdById(Long id) {
+        return thresholdRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Risk threshold not found"));
+    }
+
+    @Override
+    public List<RiskThreshold> getAllThresholds() {
+        return thresholdRepository.findAll();
+    }
+
+    @Override
+    public RiskThreshold getActiveThreshold() {
+        return thresholdRepository.findAll()
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException("No active threshold found"));
+    }
+
 }
