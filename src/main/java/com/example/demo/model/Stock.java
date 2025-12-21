@@ -20,7 +20,7 @@ public class Stock {
     private Boolean isActive = true;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    // @JsonIgnore
+    @JsonIgnore
     private List<PortfolioHolding> holdings;
 
     public Stock() {}
