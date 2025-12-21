@@ -1,36 +1,36 @@
-package com.example.demo.model;
+// package com.example.demo.model;
 
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 
-@Entity
-@Table(name = "risk_thresholds")
-public class RiskThreshold {
+// @Entity
+// @Table(name = "risk_thresholds")
+// public class RiskThreshold {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    @ManyToOne
-    private UserPortfolio portfolio;
+//     @ManyToOne
+//     private UserPortfolio portfolio;
 
-    private Double maxSingleStockPercentage;
-    private Double maxOverallVolatility;
+//     private Double maxSingleStockPercentage;
+//     private Double maxOverallVolatility;
 
-    public RiskThreshold() {}
+//     public RiskThreshold() {}
 
-    public RiskThreshold(UserPortfolio portfolio,
-                         Double maxSingleStockPercentage,
-                         Double maxOverallVolatility) {
-        this.portfolio = portfolio;
-        this.maxSingleStockPercentage = maxSingleStockPercentage;
-        this.maxOverallVolatility = maxOverallVolatility;
-    }
-    public void setPortfolio(UserPortfolio portfolio) {
-    this.portfolio = portfolio;
-}
+//     public RiskThreshold(UserPortfolio portfolio,
+//                          Double maxSingleStockPercentage,
+//                          Double maxOverallVolatility) {
+//         this.portfolio = portfolio;
+//         this.maxSingleStockPercentage = maxSingleStockPercentage;
+//         this.maxOverallVolatility = maxOverallVolatility;
+//     }
+//     public void setPortfolio(UserPortfolio portfolio) {
+//     this.portfolio = portfolio;
+// }
 
 
-    public Double getMaxSingleStockPercentage() {
-        return maxSingleStockPercentage;
-    }
-}
+//     public Double getMaxSingleStockPercentage() {
+//         return maxSingleStockPercentage;
+//     }
+// }

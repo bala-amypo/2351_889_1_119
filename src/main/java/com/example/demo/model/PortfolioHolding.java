@@ -1,57 +1,57 @@
-package com.example.demo.model;
+// package com.example.demo.model;
 
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 
-@Entity
-public class PortfolioHolding {
+// @Entity
+// public class PortfolioHolding {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
+//     @ManyToOne
+//     @JoinColumn(name = "stock_id")
+//     private Stock stock;
 
-    private int quantity;
+//     private int quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "portfolio_id")
-    private UserPortfolio portfolio;
+//     @ManyToOne
+//     @JoinColumn(name = "portfolio_id")
+//     private UserPortfolio portfolio;
 
-    public double getMarketValue() {
-        return stock.getPrice() * quantity;
-    }
+//     public double getMarketValue() {
+//         return stock.getPrice() * quantity;
+//     }
 
-    public Long getId() {
-        return id;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
-    public Stock getStock() {
-        return stock;
-    }
+//     public Stock getStock() {
+//         return stock;
+//     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+//     public int getQuantity() {
+//         return quantity;
+//     }
 
-    public UserPortfolio getPortfolio() {
-        return portfolio;
-    }
+//     public UserPortfolio getPortfolio() {
+//         return portfolio;
+//     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
 
-    public void setStock(Stock stock) {
-        this.stock = stock;
-    }
+//     public void setStock(Stock stock) {
+//         this.stock = stock;
+//     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+//     public void setQuantity(int quantity) {
+//         this.quantity = quantity;
+//     }
 
-    public void setPortfolio(UserPortfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-}
+//     public void setPortfolio(UserPortfolio portfolio) {
+//         this.portfolio = portfolio;
+//     }
+// }
