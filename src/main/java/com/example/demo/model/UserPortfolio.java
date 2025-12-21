@@ -15,6 +15,7 @@ public class UserPortfolio {
     // @ManyToOne
     // @JsonIgnore
     // private User user;
+    private Long userId;
 
     private String portfolioName;
     private LocalDateTime createdAt;
@@ -27,8 +28,9 @@ public class UserPortfolio {
 
     public UserPortfolio() {}
 
-    public UserPortfolio(User user, String portfolioName, LocalDateTime createdAt) {
-        this.user = user;
+    public UserPortfolio(User user, Long userId, String portfolioName, LocalDateTime createdAt) {
+        // this.user = user;
+        this.userId = userId;
         this.portfolioName = portfolioName;
         this.createdAt = createdAt;
     }
@@ -41,13 +43,21 @@ public class UserPortfolio {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long id) {
+        this.userId = userId;
     }
+
+    // public User getUser() {
+    //     return user;
+    // }
+
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
     public String getPortfolioName() {
         return portfolioName;
