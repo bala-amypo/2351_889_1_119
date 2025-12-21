@@ -44,4 +44,19 @@ public class UserPortfolioServiceImpl implements UserPortfolioService {
     public List<UserPortfolio> getPortfoliosByUser(Long userId) {
         return portfolioRepository.findByUserId(userId);
     }
+
+    @Override
+    public UserPortfolio updatePortfolio(Long id, UserPortfolio portfolio) {
+        UserPortfolio existing = getPortfolioById(id);
+        existing.setPortfolioName(portfolio.getPortfolioName());
+        return portfolioRepository.save(existing);
+    }
+
+    @Override
+    public void deactivatePortfolio(Long id) {
+        UserPortfolio portfolio = getPortfolioById(id);
+        // soft delete logic (future-ready)
+        portfolioRepository.save(portfolio);
+    }
+
 }
