@@ -13,7 +13,6 @@ public class Stock {
     private double price;
     private boolean active;
 
-    // ===== Getters & Setters =====
     public Long getId() {
         return id;
     }

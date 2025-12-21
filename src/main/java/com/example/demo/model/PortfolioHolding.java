@@ -19,12 +19,10 @@ public class PortfolioHolding {
     @JoinColumn(name = "portfolio_id")
     private UserPortfolio portfolio;
 
-    // ===== BUSINESS METHOD =====
     public double getMarketValue() {
         return stock.getPrice() * quantity;
     }
 
-    // ===== Getters & Setters =====
     public Long getId() {
         return id;
     }
