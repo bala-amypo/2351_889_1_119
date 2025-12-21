@@ -15,6 +15,7 @@ public class Stock {
 
     private String companyName;
     private String sector;
+    @Column(name = "active", nullable = false)
     private Boolean isActive = true;
 
     @OneToMany(mappedBy = "stock")
