@@ -17,6 +17,7 @@ public class RiskAnalysisResult {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private UserPortfolio portfolio;
 
     private LocalDateTime analysisDate;

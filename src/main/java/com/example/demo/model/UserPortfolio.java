@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +13,7 @@ public class UserPortfolio {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     private String portfolioName;

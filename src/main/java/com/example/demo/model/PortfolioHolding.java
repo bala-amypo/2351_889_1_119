@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +22,7 @@ public class PortfolioHolding {
     private UserPortfolio portfolio;
 
     @ManyToOne
+    @JsonIgnore
     private Stock stock;
 
     private Double quantity;
