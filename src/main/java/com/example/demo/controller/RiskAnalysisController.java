@@ -1,15 +1,10 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.service.RiskAnalysisService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/risk-analysis")
@@ -21,21 +16,18 @@ public class RiskAnalysisController {
         this.analysisService = analysisService;
     }
 
-    // POST /analyze/{portfolioId}
     @PostMapping("/analyze/{portfolioId}")
-    public RiskAnalysisResult analyze(@PathVariable Long portfolioId) {
+    public RiskAnalysisResult analyzePortfolio(@PathVariable Long portfolioId) {
         return analysisService.analyzePortfolio(portfolioId);
     }
 
-    // GET /{id}
     @GetMapping("/{id}")
-    public RiskAnalysisResult getAnalysis(@PathVariable Long id) {
-        throw new UnsupportedOperationException("Fetch by ID if required");
+    public RiskAnalysisResult getAnalysisById(@PathVariable Long id) {
+        return analysisService.getAnalysisById(id);
     }
 
-    // GET /portfolio/{portfolioId}
     @GetMapping("/portfolio/{portfolioId}")
-    public List<RiskAnalysisResult> getAnalyses(@PathVariable Long portfolioId) {
+    public List<RiskAnalysisResult> getAnalysesByPortfolio(@PathVariable Long portfolioId) {
         return analysisService.getAnalysesForPortfolio(portfolioId);
     }
 }
