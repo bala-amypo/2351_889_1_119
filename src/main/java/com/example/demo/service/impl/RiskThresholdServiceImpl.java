@@ -48,4 +48,10 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
         return thresholdRepository.findByPortfolioId(portfolioId)
                 .orElseThrow(() -> new ResourceNotFoundException("Portfolio not found"));
     }
+
+    @Override
+    public List<RiskThreshold> getAllThresholds() {
+        return thresholdRepository.findAll();
+    }
+
 }
