@@ -21,8 +21,8 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<UserPortfolio> portfolios;
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    // private List<UserPortfolio> portfolios;
 
     public User() {}
 
@@ -73,13 +73,11 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public List<UserPortfolio> getPortfolios() {
-        return portfolios;
-    }
+    // public List<UserPortfolio> getPortfolios() {
+    //     return portfolios;
+    // }
 
-    public void setPortfolios(List<UserPortfolio> portfolios) {
-        this.portfolios = portfolios;
-    }
-
-    
+    // public void setPortfolios(List<UserPortfolio> portfolios) {
+    //     this.portfolios = portfolios;
+    // }    
 }
