@@ -26,10 +26,10 @@ public class UserPortfolioServiceImpl implements UserPortfolioService {
 
     @Override
     public UserPortfolio createPortfolio(UserPortfolio portfolio) {
-        User user = userRepository.findById(portfolio.getUser().getId())
+        User user = userRepository.findById(portfolio.getUserId()) // portfolio.getUser().getId()
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        portfolio.setUser(user);
+        // portfolio.setUser(user);
         portfolio.setCreatedAt(LocalDateTime.now());
         return portfolioRepository.save(portfolio);
     }
