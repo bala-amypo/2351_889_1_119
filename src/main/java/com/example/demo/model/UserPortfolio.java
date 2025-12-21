@@ -12,9 +12,9 @@ public class UserPortfolio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JsonIgnore
-    private User user;
+    // @ManyToOne
+    // @JsonIgnore
+    // private User user;
 
     private String portfolioName;
     private LocalDateTime createdAt;
