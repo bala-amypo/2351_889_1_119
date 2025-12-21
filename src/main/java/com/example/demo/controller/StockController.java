@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,33 +23,32 @@ public class StockController {
         this.stockService = stockService;
     }
 
-    // POST /api/stocks
+    // POST /
     @PostMapping
     public Stock createStock(@RequestBody Stock stock) {
         return stockService.createStock(stock);
     }
 
-    // PUT /api/stocks/{id}
+    // PUT /{id}
     @PutMapping("/{id}")
-    public Stock updateStock(@PathVariable Long id,
-                             @RequestBody Stock stock) {
+    public Stock updateStock(@PathVariable Long id, @RequestBody Stock stock) {
         return stockService.updateStock(id, stock);
     }
 
-    // GET /api/stocks/{id}
+    // GET /{id}
     @GetMapping("/{id}")
-    public Stock getStockById(@PathVariable Long id) {
+    public Stock getStock(@PathVariable Long id) {
         return stockService.getStockById(id);
     }
 
-    // GET /api/stocks
+    // GET /
     @GetMapping
     public List<Stock> getAllStocks() {
         return stockService.getAllStocks();
     }
 
-    // PATCH /api/stocks/{id}/deactivate
-    @PatchMapping("/{id}/deactivate")
+    // PUT /{id}/deactivate
+    @PutMapping("/{id}/deactivate")
     public void deactivateStock(@PathVariable Long id) {
         stockService.deactivateStock(id);
     }

@@ -21,14 +21,20 @@ public class RiskAnalysisController {
         this.analysisService = analysisService;
     }
 
-    // POST /api/risk-analysis/{portfolioId}
-    @PostMapping("/{portfolioId}")
-    public RiskAnalysisResult analyzePortfolio(@PathVariable Long portfolioId) {
+    // POST /analyze/{portfolioId}
+    @PostMapping("/analyze/{portfolioId}")
+    public RiskAnalysisResult analyze(@PathVariable Long portfolioId) {
         return analysisService.analyzePortfolio(portfolioId);
     }
 
-    // GET /api/risk-analysis/{portfolioId}
-    @GetMapping("/{portfolioId}")
+    // GET /{id}
+    @GetMapping("/{id}")
+    public RiskAnalysisResult getAnalysis(@PathVariable Long id) {
+        throw new UnsupportedOperationException("Fetch by ID if required");
+    }
+
+    // GET /portfolio/{portfolioId}
+    @GetMapping("/portfolio/{portfolioId}")
     public List<RiskAnalysisResult> getAnalyses(@PathVariable Long portfolioId) {
         return analysisService.getAnalysesForPortfolio(portfolioId);
     }
