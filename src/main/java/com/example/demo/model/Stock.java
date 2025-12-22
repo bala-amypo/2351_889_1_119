@@ -21,7 +21,7 @@ public class Stock {
     private Double currentPrice;
 
 
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<PortfolioHolding> holdings;
 
