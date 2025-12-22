@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,12 +20,15 @@ public class UserPortfolio {
     private String portfolioName;
     private LocalDateTime createdAt;
     private Boolean active;
+    private LocalDateTime updatedAt;
 
-    // @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    // private List<PortfolioHolding> holdings;
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties
+    private List<PortfolioHolding> holdings;
 
-    // @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    // private List<RiskAnalysisResult> analyses;
+    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties
+    private List<RiskAnalysisResult> analyses;
 
     public UserPortfolio() {}
 
@@ -85,19 +88,19 @@ public class UserPortfolio {
         this.active = active;
     }
 
-    // public List<PortfolioHolding> getHoldings() {
-    //     return holdings;
-    // }
+    public List<PortfolioHolding> getHoldings() {
+        return holdings;
+    }
 
-    // public void setHoldings(List<PortfolioHolding> holdings) {
-    //     this.holdings = holdings;
-    // }
+    public void setHoldings(List<PortfolioHolding> holdings) {
+        this.holdings = holdings;
+    }
 
-    // public List<RiskAnalysisResult> getAnalyses() {
-    //     return analyses;
-    // }
+    public List<RiskAnalysisResult> getAnalyses() {
+        return analyses;
+    }
 
-    // public void setAnalyses(List<RiskAnalysisResult> analyses) {
-    //     this.analyses = analyses;
-    // }        
+    public void setAnalyses(List<RiskAnalysisResult> analyses) {
+        this.analyses = analyses;
+    }        
 }

@@ -18,11 +18,11 @@ public class PortfolioHolding {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
+    // @JsonIgnore
     private UserPortfolio portfolio;
 
     @ManyToOne
-    @JsonIgnore
+    // @JsonIgnore
     private Stock stock;
 
     private Double quantity;
