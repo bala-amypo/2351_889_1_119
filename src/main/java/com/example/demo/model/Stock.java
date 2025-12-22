@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class Stock {
 
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties
+    @JsonManagedReference
     private List<PortfolioHolding> holdings;
 
     public Stock() {}

@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 // import com.example.demo.model.UserPortfolio;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +20,7 @@ public class PortfolioHolding {
 
     @ManyToOne
     @JoinColumn(name = "stock_id")
+    @JsonBackReference
     private Stock stock;
 
     public Double getMarketValue() {
