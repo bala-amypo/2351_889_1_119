@@ -1,6 +1,5 @@
 package com.example.demo.model;
 
-// import com.example.demo.model.UserPortfolio;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
@@ -30,7 +29,6 @@ public class PortfolioHolding {
         return quantity * stock.getCurrentPrice();
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
