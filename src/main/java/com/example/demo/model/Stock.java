@@ -18,6 +18,8 @@ public class Stock {
     private String sector;
     @Column(name = "active", nullable = false)
     private Boolean isActive = true;
+    private Double currentPrice;
+
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
     @JsonIgnoreProperties
@@ -25,15 +27,24 @@ public class Stock {
 
     public Stock() {}
 
-    public Stock(String ticker, String companyName, String sector, Boolean isActive) {
+    public Stock(String ticker, String companyName, String sector, Boolean isActive, Double currentPrice) {
         this.ticker = ticker;
         this.companyName = companyName;
         this.sector = sector;
         this.isActive = isActive;
+        this.currentPrice = currentPrice;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Double getCurrentPrice() {
+        return currentPrice;
+    }
+
+    public void setCurrentPrice(Double currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
     public void setId(Long id) {
