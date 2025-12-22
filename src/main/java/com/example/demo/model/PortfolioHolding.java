@@ -3,7 +3,6 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "portfolio_holdings")
 public class PortfolioHolding {
 
     @Id
@@ -15,14 +14,21 @@ public class PortfolioHolding {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
-    private UserPortfolio portfolio;
+    private Portfolio portfolio;
 
     @ManyToOne
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    // ===== GETTERS & SETTERS =====
+    // 🔹 REQUIRED FOR RISK ANALYSIS
+    public Double getMarketValue() {
+        if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
+            return 0.0;
+        }
+        return quantity * stock.getCurrentPrice();
+    }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -47,19 +53,10 @@ public class PortfolioHolding {
         this.buyPrice = buyPrice;
     }
 
-    public UserPortfolio getPortfolio() {
+    public Portfolio getPortfolio() {
         return portfolio;
     }
 
-    public void setPortfolio(UserPortfolio portfolio) {
+    public void setPortfolio(Portfolio portfolio) {
         this.portfolio = portfolio;
     }
-
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
-    }
-}

@@ -1,7 +1,11 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.*;
-import com.example.demo.repository.*;
+import com.example.demo.model.Portfolio;
+import com.example.demo.model.PortfolioHolding;
+import com.example.demo.model.Stock;
+import com.example.demo.repository.PortfolioHoldingRepository;
+import com.example.demo.repository.PortfolioRepository;
+import com.example.demo.repository.StockRepository;
 import com.example.demo.service.PortfolioHoldingService;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +15,13 @@ import java.util.List;
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
     private final PortfolioHoldingRepository holdingRepo;
-    private final UserPortfolioRepository portfolioRepo;
+    private final PortfolioRepository portfolioRepo;
     private final StockRepository stockRepo;
 
     public PortfolioHoldingServiceImpl(
             PortfolioHoldingRepository holdingRepo,
-            UserPortfolioRepository portfolioRepo,
+            PortfolioRepository portfolioRepo,
             StockRepository stockRepo) {
-
         this.holdingRepo = holdingRepo;
         this.portfolioRepo = portfolioRepo;
         this.stockRepo = stockRepo;
@@ -27,8 +30,11 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     @Override
     public PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding) {
 
-        UserPortfolio portfolio = portfolioRepo.findById(portfolioId).orElseThrow();
-        Stock stock = stockRepo.findById(stockId).orElseThrow();
+        Portfolio portfolio = portfolioRepo.findById(portfolioId)
+                .orElseThrow(() -> new RuntimeException("Portfolio not found"));
+
+        Stock stock = stockRepo.findById(stockId)
+                .orElseThrow(() -> new RuntimeException("Stock not found"));
 
         holding.setPortfolio(portfolio);
         holding.setStock(stock);
@@ -39,5 +45,27 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
         return holdingRepo.findByPortfolioId(portfolioId);
+    }
+
+    @Override
+    public PortfolioHolding getHoldingById(Long holdingId) {
+        return holdingRepo.findById(holdingId)
+                .orElseThrow(() -> new RuntimeException("Holding not found"));
+    }
+
+    @Override
+    public PortfolioHolding updateHolding(Long holdingId, PortfolioHolding holding) {
+
+        PortfolioHolding existing = getHoldingById(holdingId);
+
+        existing.setQuantity(holding.getQuantity());
+        existing.setBuyPrice(holding.getBuyPrice());
+
+        return holdingRepo.save(existing);
+    }
+
+    @Override
+    public void deleteHolding(Long holdingId) {
+        holdingRepo.deleteById(holdingId);
     }
 }

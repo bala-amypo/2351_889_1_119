@@ -8,4 +8,10 @@ public interface PortfolioHoldingService {
     PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding);
 
     List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId);
+
+    PortfolioHolding getHoldingById(Long holdingId);
+
+    PortfolioHolding updateHolding(Long holdingId, PortfolioHolding holding);
+
+    void deleteHolding(Long holdingId);
 }
