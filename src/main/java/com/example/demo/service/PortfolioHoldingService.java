@@ -14,4 +14,5 @@ public interface PortfolioHoldingService {
     PortfolioHolding updateHolding(Long holdingId, PortfolioHolding holding);
 
     void deleteHolding(Long holdingId);
+    
 }
