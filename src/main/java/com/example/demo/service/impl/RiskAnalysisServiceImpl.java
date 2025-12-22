@@ -16,6 +16,17 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
         this.holdingRepo = holdingRepo;
     }
 
+
+    @Override
+    RiskAnalysisResult analyzePortfolio(Long portfolioId) {
+        return holdingRepo.findById(portfolioId);
+    }
+
+    @Override
+    RiskAnalysisResult getAnalysisById(Long id) {
+        return holdingRepo.findById(id);
+    }
+
     // @Override
     // public Double calculateTotalMarketValue(Long portfolioId) {
 
