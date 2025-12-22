@@ -30,7 +30,7 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
     @Override
     public PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding) {
 
-        Portfolio portfolio = portfolioRepo.findById(portfolioId)
+        UserPortfolio portfolio = portfolioRepo.findById(portfolioId)
                 .orElseThrow(() -> new RuntimeException("Portfolio not found"));
 
         Stock stock = stockRepo.findById(stockId)

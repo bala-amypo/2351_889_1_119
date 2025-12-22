@@ -16,14 +16,14 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
         this.holdingRepo = holdingRepo;
     }
 
-    @Override
-    public Double calculateTotalMarketValue(Long portfolioId) {
+    // @Override
+    // public Double calculateTotalMarketValue(Long portfolioId) {
 
-        List<PortfolioHolding> holdings =
-                holdingRepo.findByPortfolioId(portfolioId);
+    //     List<PortfolioHolding> holdings =
+    //             holdingRepo.findByPortfolioId(portfolioId);
 
-        return holdings.stream()
-                .mapToDouble(PortfolioHolding::getMarketValue)
-                .sum();
-    }
+    //     return holdings.stream()
+    //             .mapToDouble(PortfolioHolding::getMarketValue)
+    //             .sum();
+    // }
 }
