@@ -1,10 +1,10 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Portfolio;
+import com.example.demo.model.UserPortfolio;
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.model.Stock;
 import com.example.demo.repository.PortfolioHoldingRepository;
-import com.example.demo.repository.PortfolioRepository;
+import com.example.demo.repository.UserPortfolioRepository;
 import com.example.demo.repository.StockRepository;
 import com.example.demo.service.PortfolioHoldingService;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ import java.util.List;
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
     private final PortfolioHoldingRepository holdingRepo;
-    private final PortfolioRepository portfolioRepo;
+    private final UserPortfolioRepository portfolioRepo;
     private final StockRepository stockRepo;
 
     public PortfolioHoldingServiceImpl(
             PortfolioHoldingRepository holdingRepo,
-            PortfolioRepository portfolioRepo,
+            UserPortfolioRepository portfolioRepo,
             StockRepository stockRepo) {
         this.holdingRepo = holdingRepo;
         this.portfolioRepo = portfolioRepo;

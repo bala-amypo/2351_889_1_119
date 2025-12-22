@@ -23,12 +23,12 @@ public class PortfolioHolding {
     private Stock stock;
 
     // 🔹 Used in Risk Analysis
-    public Double getMarketValue() {
-        if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
-            return 0.0;
-        }
-        return quantity * stock.getCurrentPrice();
-    }
+    // public Double getMarketValue() {
+    //     if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
+    //         return 0.0;
+    //     }
+    //     return quantity * stock.getCurrentPrice();
+    // }
 
     // Getters and Setters
     public Long getId() {
@@ -55,7 +55,7 @@ public class PortfolioHolding {
         this.buyPrice = buyPrice;
     }
 
-    public Portfolio getPortfolio() {
+    public UserPortfolio getPortfolio() {
         return portfolio;
     }
 
