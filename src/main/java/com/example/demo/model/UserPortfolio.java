@@ -19,20 +19,22 @@ public class UserPortfolio {
 
     private String portfolioName;
     private LocalDateTime createdAt;
+    private Boolean active;
 
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<PortfolioHolding> holdings;
+    // @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    // private List<PortfolioHolding> holdings;
 
-    @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
-    private List<RiskAnalysisResult> analyses;
+    // @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
+    // private List<RiskAnalysisResult> analyses;
 
     public UserPortfolio() {}
 
-    public UserPortfolio(User user, Long userId, String portfolioName, LocalDateTime createdAt) {
+    public UserPortfolio(Long userId, String portfolioName, LocalDateTime createdAt, Boolean active) {
         // this.user = user;
         this.userId = userId;
         this.portfolioName = portfolioName;
         this.createdAt = createdAt;
+        this.active = active;
     }
 
     public Long getId() {
@@ -75,21 +77,27 @@ public class UserPortfolio {
         this.createdAt = createdAt;
     }
 
-    public List<PortfolioHolding> getHoldings() {
-        return holdings;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setHoldings(List<PortfolioHolding> holdings) {
-        this.holdings = holdings;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public List<RiskAnalysisResult> getAnalyses() {
-        return analyses;
-    }
+    // public List<PortfolioHolding> getHoldings() {
+    //     return holdings;
+    // }
 
-    public void setAnalyses(List<RiskAnalysisResult> analyses) {
-        this.analyses = analyses;
-    }
+    // public void setHoldings(List<PortfolioHolding> holdings) {
+    //     this.holdings = holdings;
+    // }
 
-        
+    // public List<RiskAnalysisResult> getAnalyses() {
+    //     return analyses;
+    // }
+
+    // public void setAnalyses(List<RiskAnalysisResult> analyses) {
+    //     this.analyses = analyses;
+    // }        
 }

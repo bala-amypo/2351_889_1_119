@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class Stock {
     private Boolean isActive = true;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @JsonIgnoreProperties
     private List<PortfolioHolding> holdings;
 
     public Stock() {}
