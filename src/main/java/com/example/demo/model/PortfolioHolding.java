@@ -20,7 +20,7 @@ public class PortfolioHolding {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    // 🔹 REQUIRED FOR RISK ANALYSIS
+    // 🔹 Used in Risk Analysis
     public Double getMarketValue() {
         if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
             return 0.0;
@@ -60,3 +60,12 @@ public class PortfolioHolding {
     public void setPortfolio(Portfolio portfolio) {
         this.portfolio = portfolio;
     }
+
+    public Stock getStock() {
+        return stock;
+    }
+
+    public void setStock(Stock stock) {
+        this.stock = stock;
+    }
+}
