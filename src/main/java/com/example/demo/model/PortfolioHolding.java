@@ -22,7 +22,6 @@ public class PortfolioHolding {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    // 🔹 Used in Risk Analysis
     // public Double getMarketValue() {
     //     if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
     //         return 0.0;
