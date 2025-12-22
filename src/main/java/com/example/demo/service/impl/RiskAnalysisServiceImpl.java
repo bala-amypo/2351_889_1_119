@@ -59,7 +59,6 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
         this.holdingRepo = holdingRepo;
     }
 
-    // ✅ 1. Analyze portfolio
     @Override
     public RiskAnalysisResult analyzePortfolio(Long portfolioId) {
 
@@ -73,7 +72,7 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
         String riskLevel = calculateRiskLevel(totalMarketValue);
 
         RiskAnalysisResult result = new RiskAnalysisResult();
-        result.setPortfolioId(portfolioId);
+        result.setId(portfolioId);
         result.setTotalMarketValue(totalMarketValue);
         result.setRiskLevel(riskLevel);
 
