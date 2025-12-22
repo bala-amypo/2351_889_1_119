@@ -18,11 +18,11 @@ public class PortfolioHolding {
     private Long id;
 
     @ManyToOne
-    // @JsonIgnore
+    @JoinColumn(name = "portfolio_id")
     private UserPortfolio portfolio;
 
     @ManyToOne
-    // @JsonIgnore
+    @JoinColumn(name = "dtock_id")
     private Stock stock;
 
     private Double quantity;

@@ -20,7 +20,6 @@ public class UserPortfolio {
     private String portfolioName;
     private LocalDateTime createdAt;
     private Boolean active;
-    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
     @JsonIgnoreProperties
