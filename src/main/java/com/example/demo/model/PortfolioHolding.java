@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import 
+// import com.example.demo.model.UserPortfolio;
 
 import jakarta.persistence.*;
 
@@ -16,7 +16,7 @@ public class PortfolioHolding {
 
     @ManyToOne
     @JoinColumn(name = "portfolio_id")
-    private Portfolio portfolio;
+    private UserPortfolio portfolio;
 
     @ManyToOne
     @JoinColumn(name = "stock_id")
@@ -59,7 +59,7 @@ public class PortfolioHolding {
         return portfolio;
     }
 
-    public void setPortfolio(Portfolio portfolio) {
+    public void setPortfolio(UserPortfolio portfolio) {
         this.portfolio = portfolio;
     }
 
