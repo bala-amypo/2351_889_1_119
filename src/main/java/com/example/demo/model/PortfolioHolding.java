@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,7 +23,7 @@ public class PortfolioHolding {
     private UserPortfolio portfolio;
 
     @ManyToOne
-    @JoinColumn(name = "dtock_id")
+    @JoinColumn(name = "stock_id")
     private Stock stock;
 
     private Double quantity;
