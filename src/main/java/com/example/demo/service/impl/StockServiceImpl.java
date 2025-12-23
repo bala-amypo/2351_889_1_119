@@ -35,7 +35,7 @@ public class StockServiceImpl implements StockService {
         return stockRepository.save(existing);
     }
     @Override
-public Stock getStock(Long id) {
+       public Stock getStock(Long id) {
     return getStockById(id);
 }
 
