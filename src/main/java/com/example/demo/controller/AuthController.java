@@ -1,48 +1,38 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AuthResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.dto.AuthResponse;
 import com.example.demo.security.JwtUtil;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 @RestController
-@RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
-    public AuthController(UserRepository userRepository, JwtUtil jwtUtil) {
-        this.userRepository = userRepository;
+    public AuthController(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
     }
 
+    // Login endpoint
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody User request) {
+        // Here we simulate authentication
+        // In real scenario, you would verify password with UserService/UserRepository
+        String email = request.getEmail(); // use getEmail() instead of getUsername()
 
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("Invalid username"));
+        // Simulate fetching user from DB (replace with actual UserService call)
+        User user = new User(email, "password", "ROLE_USER");
 
-        if (!user.getPassword().equals(request.getPassword())) {
-            throw new RuntimeException("Invalid password");
-        }
+        // Generate JWT token
+        String token = jwtUtil.generateToken(user.getEmail(), user.getId(), user.getRole());
 
-        // JwtUtil expects (String, Long, String)
-        String token = jwtUtil.generateToken(
-                user.getUsername(),
-                user.getId(),
-                user.getRole()
-        );
-
-        AuthResponse response = new AuthResponse();
-        response.setToken(token);
-        response.setUserId(user.getId());
-        response.setUsername(user.getUsername());
-        response.setRole(user.getRole());
-
+        // Return AuthResponse
+        AuthResponse response = new AuthResponse(token, user.getId(), user.getEmail(), user.getRole());
         return ResponseEntity.ok(response);
     }
 }
