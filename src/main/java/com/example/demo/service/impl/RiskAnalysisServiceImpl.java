@@ -10,6 +10,7 @@ import com.example.demo.service.UserPortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;  // fixed import
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
         double totalMarketValue = holdings.stream()
                 .map(PortfolioHolding::getMarketValue)
-                .mapToDouble(BigDecimal::doubleValue)     // fixed BigDecimal
+                .mapToDouble(BigDecimal::doubleValue)
                 .sum();
 
         double highestPercentage = holdings.stream()
@@ -41,10 +42,10 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
                 .orElse(0.0);
 
         RiskAnalysisResult result = new RiskAnalysisResult();
-        result.setPortfolio(portfolio);                  // fixed
-        result.setAnalysisDate(LocalDateTime.now());     // fixed
-        result.setHighestStockPercentage(highestPercentage); // fixed
-        result.setIsHighRisk(highestPercentage > 50);   // example threshold
+        result.setPortfolio(portfolio);
+        result.setAnalysisDate(LocalDateTime.now());
+        result.setHighestStockPercentage(highestPercentage);
+        result.setIsHighRisk(highestPercentage > 50);  // example threshold
 
         return resultRepository.save(result);
     }
@@ -52,5 +53,12 @@ public class RiskAnalysisServiceImpl implements RiskAnalysisService {
     @Override
     public List<RiskAnalysisResult> getAnalysesForPortfolio(Long portfolioId) {
         return resultRepository.findByPortfolioId(portfolioId);
+    }
+
+    // Implement getAnalysisById to satisfy interface
+    @Override
+    public RiskAnalysisResult getAnalysisById(Long id) {
+        return resultRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("RiskAnalysisResult not found"));
     }
 }

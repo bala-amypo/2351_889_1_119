@@ -29,12 +29,13 @@ public class AuthController {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtUtil.generateToken(user);
+        // Pass email, id, and role to generateToken
+        String token = jwtUtil.generateToken(user.getEmail(), user.getId(), user.getRole());
 
         AuthResponse response = new AuthResponse();
         response.setUserId(user.getId());
-        response.setEmail(user.getEmail());       // fixed
-        response.setRole(user.getRole());         // fixed
+        response.setEmail(user.getEmail());
+        response.setRole(user.getRole());
         response.setToken(token);
 
         return response;

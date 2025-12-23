@@ -37,13 +37,22 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
             throw new IllegalArgumentException("Market value cannot be negative");
         }
 
-        holding.setPortfolio(portfolio);   // fixed
-        holding.setStock(stock);           // fixed
+        holding.setPortfolio(portfolio);
+        holding.setStock(stock);
+
         return holdingRepository.save(holding);
     }
 
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
         return holdingRepository.findByPortfolioId(portfolioId);
+    }
+
+    // Implement deleteHolding to satisfy interface
+    @Override
+    public void deleteHolding(Long id) {
+        PortfolioHolding holding = holdingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Holding not found"));
+        holdingRepository.delete(holding);
     }
 }
