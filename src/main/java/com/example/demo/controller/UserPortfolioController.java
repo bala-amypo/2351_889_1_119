@@ -2,29 +2,24 @@ package com.example.demo.controller;
 
 import com.example.demo.model.UserPortfolio;
 import com.example.demo.service.UserPortfolioService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/portfolio")
+@RequestMapping("/portfolio")
 public class UserPortfolioController {
 
-    private final UserPortfolioService userPortfolioService;
+    private final UserPortfolioService service;
 
-    public UserPortfolioController(UserPortfolioService userPortfolioService) {
-        this.userPortfolioService = userPortfolioService;
+    public UserPortfolioController(UserPortfolioService service) {
+        this.service = service;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<UserPortfolio> createPortfolio(
-            @RequestParam Long userId,
-            @RequestParam String portfolioName) {
-
+    @PostMapping
+    public UserPortfolio createPortfolio(@RequestParam Long userId,
+                                         @RequestParam String name) {
         UserPortfolio portfolio = new UserPortfolio();
         portfolio.setUserId(userId);
-        portfolio.setPortfolioName(portfolioName);
-
-        UserPortfolio saved = userPortfolioService.createPortfolio(portfolio);
-        return ResponseEntity.ok(saved);
+        portfolio.setPortfolioName(name);
+        return service.save(portfolio);
     }
 }
