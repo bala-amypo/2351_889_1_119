@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.model.User;
 import com.example.demo.dto.AuthResponse;
+import com.example.demo.model.User;
 import com.example.demo.security.JwtUtil;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final JwtUtil jwtUtil;
@@ -18,21 +16,27 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // Login endpoint
+    // Example login endpoint
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody User request) {
-        // Here we simulate authentication
-        // In real scenario, you would verify password with UserService/UserRepository
-        String email = request.getEmail(); // use getEmail() instead of getUsername()
+        // In a real app, validate username/password here
+        User user = new User(request.getUsername(), request.getEmail(), request.getPassword());
 
-        // Simulate fetching user from DB (replace with actual UserService call)
-        User user = new User(email, "password", "ROLE_USER");
+        // Generate token
+        String token = jwtUtil.generateToken(user.getUsername(), user.getId(), user.getEmail());
 
-        // Generate JWT token
-        String token = jwtUtil.generateToken(user.getEmail(), user.getId(), user.getRole());
+        AuthResponse response = new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
+        return ResponseEntity.ok(response);
+    }
 
-        // Return AuthResponse
-        AuthResponse response = new AuthResponse(token, user.getId(), user.getEmail(), user.getRole());
+    // Example registration endpoint
+    @PostMapping("/register")
+    public ResponseEntity<AuthResponse> register(@RequestBody User request) {
+        User newUser = new User(request.getUsername(), request.getEmail(), request.getPassword());
+        // In a real app, save newUser to DB here
+
+        String token = jwtUtil.generateToken(newUser.getUsername(), newUser.getId(), newUser.getEmail());
+        AuthResponse response = new AuthResponse(token, newUser.getId(), newUser.getUsername(), newUser.getEmail());
         return ResponseEntity.ok(response);
     }
 }
