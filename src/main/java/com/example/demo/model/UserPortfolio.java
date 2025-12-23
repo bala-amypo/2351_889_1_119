@@ -1,32 +1,51 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "user_portfolios")
 public class UserPortfolio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userEmail;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @Column(nullable = false)
+    private String portfolioName;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "portfolio")
     private List<PortfolioHolding> holdings;
+
+    @OneToMany(mappedBy = "portfolio")
+    private List<RiskAnalysisResult> riskAnalysisResults;
 
     public UserPortfolio() {}
 
-    public UserPortfolio(String userEmail, List<PortfolioHolding> holdings) {
-        this.userEmail = userEmail;
-        this.holdings = holdings;
+    public UserPortfolio(User user, String portfolioName, LocalDateTime createdAt) {
+        this.user = user;
+        this.portfolioName = portfolioName;
+        this.createdAt = createdAt;
     }
 
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public String getUserEmail() { return userEmail; }
-    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+    public String getPortfolioName() { return portfolioName; }
+    public void setPortfolioName(String portfolioName) { this.portfolioName = portfolioName; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public List<PortfolioHolding> getHoldings() { return holdings; }
     public void setHoldings(List<PortfolioHolding> holdings) { this.holdings = holdings; }
+    public List<RiskAnalysisResult> getRiskAnalysisResults() { return riskAnalysisResults; }
+    public void setRiskAnalysisResults(List<RiskAnalysisResult> riskAnalysisResults) { this.riskAnalysisResults = riskAnalysisResults; }
 }

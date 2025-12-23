@@ -1,30 +1,50 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
+@Table(name = "stocks")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String symbol;
-    private BigDecimal price;
+    @Column(unique = true, nullable = false)
+    private String ticker;
+
+    @Column(nullable = false)
+    private String companyName;
+
+    @Column(nullable = false)
+    private String sector;
+
+    @Column(nullable = false)
+    private Boolean isActive;
+
+    @OneToMany(mappedBy = "stock")
+    private List<PortfolioHolding> holdings;
 
     public Stock() {}
 
-    public Stock(String symbol, BigDecimal price) {
-        this.symbol = symbol;
-        this.price = price;
+    public Stock(String ticker, String companyName, String sector, Boolean isActive) {
+        this.ticker = ticker;
+        this.companyName = companyName;
+        this.sector = sector;
+        this.isActive = isActive;
     }
 
+    // Getters & Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-    public String getSymbol() { return symbol; }
-    public void setSymbol(String symbol) { this.symbol = symbol; }
-
-    public BigDecimal getPrice() { return price; }
-    public void setPrice(BigDecimal price) { this.price = price; }
+    public String getTicker() { return ticker; }
+    public void setTicker(String ticker) { this.ticker = ticker; }
+    public String getCompanyName() { return companyName; }
+    public void setCompanyName(String companyName) { this.companyName = companyName; }
+    public String getSector() { return sector; }
+    public void setSector(String sector) { this.sector = sector; }
+    public Boolean getIsActive() { return isActive; }
+    public void setIsActive(Boolean isActive) { this.isActive = isActive; }
+    public List<PortfolioHolding> getHoldings() { return holdings; }
+    public void setHoldings(List<PortfolioHolding> holdings) { this.holdings = holdings; }
 }
