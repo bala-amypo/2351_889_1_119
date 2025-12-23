@@ -34,6 +34,11 @@ public class StockServiceImpl implements StockService {
         existing.setSector(stock.getSector());
         return stockRepository.save(existing);
     }
+    @Override
+public Stock getStock(Long id) {
+    return getStockById(id);
+}
+
 
     @Override
     public Stock getStockById(Long id) {
