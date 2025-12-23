@@ -1,18 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.PortfolioHolding;
 import java.util.List;
+import com.example.demo.model.PortfolioHolding;
 
 public interface PortfolioHoldingService {
-
-    PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding);
-
+    PortfolioHolding createHolding(PortfolioHolding holding);
+    PortfolioHolding updateHolding(Long id, PortfolioHolding holding);
+    PortfolioHolding getHoldingById(Long id);
     List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId);
-
-    PortfolioHolding getHoldingById(Long holdingId);
-
-    PortfolioHolding updateHolding(Long holdingId, PortfolioHolding holding);
-
-    void deleteHolding(Long holdingId);
-    
+    void deleteHolding(Long id);
 }
