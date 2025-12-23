@@ -13,14 +13,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "mysecretkey"; // change to secure key
+    private final String SECRET_KEY = "mysecretkey"; // Replace with a strong key
 
-    // Extract username from JWT
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extract expiration date
     public Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
@@ -41,7 +39,6 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    // Generate token
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, username);
