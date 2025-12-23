@@ -10,6 +10,7 @@ public interface StockService {
 
     Stock updateStock(Long id, Stock stock);
     Stock getStock(Long id);
+    
 
     Stock getStockById(Long id);
 
