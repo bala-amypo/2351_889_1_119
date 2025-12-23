@@ -17,10 +17,8 @@ public class UserPortfolio {
 
     private LocalDateTime createdAt;
 
-    // ✅ NO-ARGS CONSTRUCTOR
     public UserPortfolio() {}
 
-    // ✅ ALL-ARGS CONSTRUCTOR
     public UserPortfolio(Long id, Long userId, String portfolioName, LocalDateTime createdAt) {
         this.id = id;
         this.userId = userId;
@@ -28,33 +26,32 @@ public class UserPortfolio {
         this.createdAt = createdAt;
     }
 
-    // ✅ GETTERS & SETTERS
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public String getPortfolioName() {
         return portfolioName;
     }
 
-    public void setPortfolioName(String portfolioName) {
-        this.portfolioName = portfolioName;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setPortfolioName(String portfolioName) {
+        this.portfolioName = portfolioName;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

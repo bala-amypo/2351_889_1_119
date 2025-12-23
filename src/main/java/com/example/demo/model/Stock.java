@@ -1,86 +1,47 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "stocks")
 public class Stock {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @Column(unique = true, nullable = false)
-    private String ticker;
-    
-    @Column(nullable = false)
-    private String companyName;
-    
-    @Column(nullable = false)
-    private String sector;
-    
-    @Column(nullable = false)
-    private Boolean active;
-    
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PortfolioHolding> holdings;
-    
-    public Stock() {
+
+    private String symbol;
+
+    private boolean isActive;
+
+    public Stock() {}
+
+    public Stock(Long id, String symbol, boolean isActive) {
+        this.id = id;
+        this.symbol = symbol;
+        this.isActive = isActive;
     }
-    
-    public Stock(String ticker, String companyName, String sector, Boolean active) {
-        this.ticker = ticker;
-        this.companyName = companyName;
-        this.sector = sector;
-        this.active = active != null ? active : true;
-    }
-    
+
     public Long getId() {
         return id;
     }
-    
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getTicker() {
-        return ticker;
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
-    
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-    
-    public String getCompanyName() {
-        return companyName;
-    }
-    
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-    
-    public String getSector() {
-        return sector;
-    }
-    
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-    
-    public Boolean getActive() {
-        return active;
-    }
-    
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-    
-    public List<PortfolioHolding> getHoldings() {
-        return holdings;
-    }
-    
-    public void setHoldings(List<PortfolioHolding> holdings) {
-        this.holdings = holdings;
+
+    public void setIsActive(boolean active) {
+        this.isActive = active;
     }
 }
