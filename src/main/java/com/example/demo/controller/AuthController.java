@@ -21,17 +21,17 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // 🔐 LOGIN API
+   
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
 
-        // 1️⃣ Authenticate user
+     
         User user = authService.authenticate(
                 request.getUsername(),
                 request.getPassword()
         );
 
-        // 2️⃣ Generate JWT token (MATCHES JwtUtil signature)
+    
         String token = jwtUtil.generateToken(
                 user.getUsername(),
                 user.getId(),
@@ -46,7 +46,7 @@ public class AuthController {
                 user.getRole()
         );
 
-        // 4️⃣ Return response
+       
         return ResponseEntity.ok(response);
     }
 }
