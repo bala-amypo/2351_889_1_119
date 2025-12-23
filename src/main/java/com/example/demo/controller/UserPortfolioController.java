@@ -1,44 +1,34 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.UserPortfolio;
-import com.example.demo.service.UserPortfolioService;
+import com.example.demo.model.PortfolioHolding;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/portfolios")
+@RequestMapping("/api/portfolio")
 public class UserPortfolioController {
 
-    private final UserPortfolioService portfolioService;
-
-    public UserPortfolioController(UserPortfolioService portfolioService) {
-        this.portfolioService = portfolioService;
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserPortfolio> getPortfolio(@PathVariable Long userId) {
+        // Mock implementation
+        UserPortfolio portfolio = new UserPortfolio();
+        portfolio.setUserId(userId);
+        return ResponseEntity.ok(portfolio);
     }
 
-    @PostMapping
-    public UserPortfolio createPortfolio(@RequestBody UserPortfolio portfolio) {
-        return portfolioService.createPortfolio(portfolio);
+    @PostMapping("/{userId}/holdings")
+    public ResponseEntity<PortfolioHolding> addHolding(@PathVariable Long userId,
+                                                       @RequestBody PortfolioHolding holding) {
+        // Mock implementation: add holding to user portfolio
+        return ResponseEntity.ok(holding);
     }
 
-    @PutMapping("/{id}")
-    public UserPortfolio updatePortfolio(@PathVariable Long id,
-                                         @RequestBody UserPortfolio portfolio) {
-        return portfolioService.updatePortfolio(id, portfolio);
-    }
-
-    @GetMapping("/{id}")
-    public UserPortfolio getPortfolioById(@PathVariable Long id) {
-        return portfolioService.getPortfolioById(id);
-    }
-
-    @GetMapping("/user/{userId}")
-    public List<UserPortfolio> getPortfoliosByUser(@PathVariable Long userId) {
-        return portfolioService.getPortfoliosByUser(userId);
-    }
-
-    @PutMapping("/{id}/deactivate")
-    public void deactivatePortfolio(@PathVariable Long id) {
-        portfolioService.deactivatePortfolio(id);
+    @GetMapping("/{userId}/holdings")
+    public ResponseEntity<List<PortfolioHolding>> getHoldings(@PathVariable Long userId) {
+        // Mock implementation
+        return ResponseEntity.ok(List.of());
     }
 }

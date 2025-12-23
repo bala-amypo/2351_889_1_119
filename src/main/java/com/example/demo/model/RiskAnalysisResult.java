@@ -1,81 +1,21 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
-@Entity
 public class RiskAnalysisResult {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "portfolioId")
-    private UserPortfolio portfolio;
-
-    private LocalDateTime analysisDate;
-    private Double highestStockPercentage;
-    private Boolean isHighRisk;
+    private boolean highRisk;
+    private BigDecimal totalMarketValue;
 
     public RiskAnalysisResult() {}
 
-    public RiskAnalysisResult(UserPortfolio portfolio,
-                              LocalDateTime analysisDate,
-                              Double highestStockPercentage,
-                              Boolean isHighRisk) {
-        this.portfolio = portfolio;
-        this.analysisDate = analysisDate;
-        this.highestStockPercentage = highestStockPercentage;
-        this.isHighRisk = isHighRisk;
+    public RiskAnalysisResult(boolean highRisk, BigDecimal totalMarketValue) {
+        this.highRisk = highRisk;
+        this.totalMarketValue = totalMarketValue;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public boolean isHighRisk() { return highRisk; }
+    public void setHighRisk(boolean highRisk) { this.highRisk = highRisk; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UserPortfolio getPortfolio() {
-        return portfolio;
-    }
-
-    public void setPortfolio(UserPortfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-
-    public LocalDateTime getAnalysisDate() {
-        return analysisDate;
-    }
-
-    public void setAnalysisDate(LocalDateTime analysisDate) {
-        this.analysisDate = analysisDate;
-    }
-
-    public Double getHighestStockPercentage() {
-        return highestStockPercentage;
-    }
-
-    public void setHighestStockPercentage(Double highestStockPercentage) {
-        this.highestStockPercentage = highestStockPercentage;
-    }
-
-    public Boolean getIsHighRisk() {
-        return isHighRisk;
-    }
-
-    public void setIsHighRisk(Boolean isHighRisk) {
-        this.isHighRisk = isHighRisk;
-    }
-
-    
+    public BigDecimal getTotalMarketValue() { return totalMarketValue; }
+    public void setTotalMarketValue(BigDecimal totalMarketValue) { this.totalMarketValue = totalMarketValue; }
 }

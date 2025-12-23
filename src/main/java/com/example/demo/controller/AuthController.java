@@ -16,27 +16,25 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // Example login endpoint
+    // Login endpoint
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody User request) {
-        // In a real app, validate username/password here
-        User user = new User(request.getUsername(), request.getEmail(), request.getPassword());
+        // Normally you would validate user credentials here
+        User user = request; // For demo, we assume the request contains valid user info
 
         // Generate token
-        String token = jwtUtil.generateToken(user.getUsername(), user.getId(), user.getEmail());
+        String token = jwtUtil.generateToken(
+                user.getUsername(),
+                user.getId(),
+                user.getRole()
+        );
 
-        AuthResponse response = new AuthResponse(token, user.getId(), user.getUsername(), user.getEmail());
-        return ResponseEntity.ok(response);
-    }
+        AuthResponse response = new AuthResponse();
+        response.setUsername(user.getUsername());
+        response.setUserId(user.getId());
+        response.setRole(user.getRole());
+        response.setToken(token);
 
-    // Example registration endpoint
-    @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody User request) {
-        User newUser = new User(request.getUsername(), request.getEmail(), request.getPassword());
-        // In a real app, save newUser to DB here
-
-        String token = jwtUtil.generateToken(newUser.getUsername(), newUser.getId(), newUser.getEmail());
-        AuthResponse response = new AuthResponse(token, newUser.getId(), newUser.getUsername(), newUser.getEmail());
         return ResponseEntity.ok(response);
     }
 }
