@@ -12,35 +12,34 @@ public class User {
     private Long id;
 
     private String username;
-
     private String email;
-
     private String password;
-
+    private String role; // user role (like "USER" or "ADMIN")
     private LocalDateTime createdAt;
-
     private boolean isActive;
 
     // No-args constructor
     public User() {}
 
-    // Full constructor
-    public User(Long id, String username, String email, String password, LocalDateTime createdAt, boolean isActive) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.createdAt = createdAt;
-        this.isActive = isActive;
-    }
-
-    // Constructor for registration (without id and createdAt)
+    // Constructor used in AuthController for registration/login
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = "USER"; // default role
         this.createdAt = LocalDateTime.now();
         this.isActive = true;
+    }
+
+    // Full constructor
+    public User(Long id, String username, String email, String password, String role, LocalDateTime createdAt, boolean isActive) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.isActive = isActive;
     }
 
     // Getters and Setters
@@ -55,6 +54,9 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
