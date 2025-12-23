@@ -3,39 +3,57 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "thresholdName"))
 public class RiskThreshold {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long portfolioId;
+    private String thresholdName;
+    private Double maxSingleStockPercentage;
+    private Double maxSectorPercentage;
+    private Boolean active = false;
 
-    private Double threshold;
-
-    public RiskThreshold() {}
+    // ----- Getters & Setters -----
 
     public Long getId() {
         return id;
-    }
-
-    public Long getPortfolioId() {
-        return portfolioId;
-    }
-
-    public Double getThreshold() {
-        return threshold;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setPortfolioId(Long portfolioId) {
-        this.portfolioId = portfolioId;
+    public String getThresholdName() {
+        return thresholdName;
     }
 
-    public void setThreshold(Double threshold) {
-        this.threshold = threshold;
+    public void setThresholdName(String thresholdName) {
+        this.thresholdName = thresholdName;
+    }
+
+    public Double getMaxSingleStockPercentage() {
+        return maxSingleStockPercentage;
+    }
+
+    public void setMaxSingleStockPercentage(Double maxSingleStockPercentage) {
+        this.maxSingleStockPercentage = maxSingleStockPercentage;
+    }
+
+    public Double getMaxSectorPercentage() {
+        return maxSectorPercentage;
+    }
+
+    public void setMaxSectorPercentage(Double maxSectorPercentage) {
+        this.maxSectorPercentage = maxSectorPercentage;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
