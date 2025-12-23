@@ -1,20 +1,86 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import java.util.List;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "stocks")
 public class Stock {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(unique = true)
+    
+    @Column(unique = true, nullable = false)
     private String ticker;
+    
+    @Column(nullable = false)
     private String companyName;
+    
+    @Column(nullable = false)
     private String sector;
-    private Boolean active = true;
+    
+    @Column(nullable = false)
+    private Boolean active;
+    
+    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PortfolioHolding> holdings;
+    
+    public Stock() {
+    }
+    
+    public Stock(String ticker, String companyName, String sector, Boolean active) {
+        this.ticker = ticker;
+        this.companyName = companyName;
+        this.sector = sector;
+        this.active = active != null ? active : true;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getTicker() {
+        return ticker;
+    }
+    
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
+    }
+    
+    public String getCompanyName() {
+        return companyName;
+    }
+    
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+    
+    public String getSector() {
+        return sector;
+    }
+    
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
+    
+    public Boolean getActive() {
+        return active;
+    }
+    
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+    
+    public List<PortfolioHolding> getHoldings() {
+        return holdings;
+    }
+    
+    public void setHoldings(List<PortfolioHolding> holdings) {
+        this.holdings = holdings;
+    }
 }
