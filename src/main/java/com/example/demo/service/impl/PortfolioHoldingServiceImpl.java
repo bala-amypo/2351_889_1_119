@@ -48,7 +48,37 @@ public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
         return holdingRepository.findByPortfolioId(portfolioId);
     }
 
-    // Implement deleteHolding to satisfy interface
+    @Override
+    public PortfolioHolding getHoldingById(Long id) {
+        return holdingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Holding not found"));
+    }
+
+    @Override
+    public PortfolioHolding updateHolding(Long id, PortfolioHolding holdingDetails) {
+        PortfolioHolding existing = holdingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Holding not found"));
+
+        if (holdingDetails.getQuantity() <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than 0");
+        }
+        if (holdingDetails.getMarketValue().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Market value cannot be negative");
+        }
+
+        if (holdingDetails.getPortfolio() != null) {
+            existing.setPortfolio(holdingDetails.getPortfolio());
+        }
+        if (holdingDetails.getStock() != null) {
+            existing.setStock(holdingDetails.getStock());
+        }
+
+        existing.setQuantity(holdingDetails.getQuantity());
+        existing.setMarketValue(holdingDetails.getMarketValue());
+
+        return holdingRepository.save(existing);
+    }
+
     @Override
     public void deleteHolding(Long id) {
         PortfolioHolding holding = holdingRepository.findById(id)
