@@ -1,54 +1,54 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.dto.LoginRequest;
-// import com.example.demo.dto.AuthResponse;
-// import com.example.demo.model.User;
-// import com.example.demo.security.JwtUtil;
-// import com.example.demo.service.UserService;
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.model.User;
+import com.example.demo.security.JwtUtil;
+import com.example.demo.service.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/auth")
-// public class AuthController {
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
 
-//     private final AuthenticationManager authenticationManager;
-//     private final JwtUtil jwtUtil;
-//     private final UserService userService;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-//     public AuthController(AuthenticationManager authenticationManager,
-//                           JwtUtil jwtUtil,
-//                           UserService userService) {
-//         this.authenticationManager = authenticationManager;
-//         this.jwtUtil = jwtUtil;
-//         this.userService = userService;
-//     }
+    public AuthController(AuthenticationManager authenticationManager,
+                          JwtUtil jwtUtil,
+                          UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
+    }
 
-//     // POST /auth/login
-//     @PostMapping("/login")
-//     public AuthResponse login(@RequestBody LoginRequest request) {
-//         authenticationManager.authenticate(
-//                 new UsernamePasswordAuthenticationToken(
-//                         request.getEmail(),
-//                         request.getPassword()
-//                 )
-//         );
+    // POST /auth/login
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
 
-//         User user = userService.findByEmail(request.getEmail());
-//         String token = jwtUtil.generateToken(user);
+        User user = userService.findByEmail(request.getEmail());
+        String token = jwtUtil.generateToken(user);
 
-//         return new AuthResponse(
-//                 token,
-//                 user.getId(),
-//                 user.getEmail(),
-//                 user.getRole()
-//         );
-//     }
+        return new AuthResponse(
+                token,
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
+    }
 
-//     // OPTIONAL: POST /auth/register
-//     @PostMapping("/register")
-//     public User register(@RequestBody User user) {
-//         return userService.registerUser(user);
-//     }
-// }
+    // OPTIONAL: POST /auth/register
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
+}
