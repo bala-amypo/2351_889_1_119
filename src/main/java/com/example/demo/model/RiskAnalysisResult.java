@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "risk_analysis_results")
 public class RiskAnalysisResult {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,15 +33,19 @@ public class RiskAnalysisResult {
         this.isHighRisk = isHighRisk;
     }
 
-    // Getters & Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public UserPortfolio getPortfolio() { return portfolio; }
     public void setPortfolio(UserPortfolio portfolio) { this.portfolio = portfolio; }
+
     public LocalDateTime getAnalysisDate() { return analysisDate; }
     public void setAnalysisDate(LocalDateTime analysisDate) { this.analysisDate = analysisDate; }
+
     public Double getHighestStockPercentage() { return highestStockPercentage; }
     public void setHighestStockPercentage(Double highestStockPercentage) { this.highestStockPercentage = highestStockPercentage; }
+
     public Boolean getIsHighRisk() { return isHighRisk; }
     public void setIsHighRisk(Boolean isHighRisk) { this.isHighRisk = isHighRisk; }
 }
