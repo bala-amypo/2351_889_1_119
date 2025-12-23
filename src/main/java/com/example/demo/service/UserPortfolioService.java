@@ -3,6 +3,6 @@ package com.example.demo.service;
 import com.example.demo.model.UserPortfolio;
 
 public interface UserPortfolioService {
-
-    UserPortfolio createPortfolio(UserPortfolio portfolio);
+    UserPortfolio save(UserPortfolio portfolio);
+    UserPortfolio getPortfolioById(Long id);
 }
