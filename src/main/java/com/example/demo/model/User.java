@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,24 +13,21 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String role; // user role (like "USER" or "ADMIN")
+    private String role;
     private LocalDateTime createdAt;
     private boolean isActive;
 
-    // No-args constructor
     public User() {}
 
-    // Constructor used in AuthController for registration/login
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.role = "USER"; // default role
+        this.role = "USER";
         this.createdAt = LocalDateTime.now();
         this.isActive = true;
     }
 
-    // Full constructor
     public User(Long id, String username, String email, String password, String role, LocalDateTime createdAt, boolean isActive) {
         this.id = id;
         this.username = username;

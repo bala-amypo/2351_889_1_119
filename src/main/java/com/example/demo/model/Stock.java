@@ -1,95 +1,30 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 public class Stock {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String ticker;
-
-    private String companyName;
-    private String sector;
-    @Column(name = "active", nullable = false)
-    private Boolean isActive = true;
-    private Double currentPrice;
-
-
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private List<PortfolioHolding> holdings;
+    private String symbol;
+    private BigDecimal price;
 
     public Stock() {}
 
-    public Stock(String ticker, String companyName, String sector, Boolean isActive, Double currentPrice) {
-        this.ticker = ticker;
-        this.companyName = companyName;
-        this.sector = sector;
-        this.isActive = isActive;
-        this.currentPrice = currentPrice;
+    public Stock(String symbol, BigDecimal price) {
+        this.symbol = symbol;
+        this.price = price;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Double getCurrentPrice() {
-        return currentPrice;
-    }
+    public String getSymbol() { return symbol; }
+    public void setSymbol(String symbol) { this.symbol = symbol; }
 
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTicker() {
-        return ticker;
-    }
-
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getSector() {
-        return sector;
-    }
-
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public List<PortfolioHolding> getHoldings() {
-        return holdings;
-    }
-
-    public void setHoldings(List<PortfolioHolding> holdings) {
-        this.holdings = holdings;
-    }
-
-    
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 }

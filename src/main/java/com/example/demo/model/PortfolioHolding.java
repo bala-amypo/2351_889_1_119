@@ -1,71 +1,35 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 public class PortfolioHolding {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String stockSymbol;
     private Integer quantity;
-    private Double buyPrice;
+    private BigDecimal marketValue;
 
-    @ManyToOne
-    @JoinColumn(name = "portfolio_id")
-    private UserPortfolio portfolio;
+    public PortfolioHolding() {}
 
-    @ManyToOne
-    @JoinColumn(name = "stock_id")
-    @JsonBackReference
-    private Stock stock;
-
-    public Double getMarketValue() {
-        if (stock == null || stock.getCurrentPrice() == null || quantity == null) {
-            return 0.0;
-        }
-        return quantity * stock.getCurrentPrice();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
+    public PortfolioHolding(String stockSymbol, Integer quantity, BigDecimal marketValue) {
+        this.stockSymbol = stockSymbol;
         this.quantity = quantity;
+        this.marketValue = marketValue;
     }
 
-    public Double getBuyPrice() {
-        return buyPrice;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setBuyPrice(Double buyPrice) {
-        this.buyPrice = buyPrice;
-    }
+    public String getStockSymbol() { return stockSymbol; }
+    public void setStockSymbol(String stockSymbol) { this.stockSymbol = stockSymbol; }
 
-    public UserPortfolio getPortfolio() {
-        return portfolio;
-    }
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
-    public void setPortfolio(UserPortfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-
-    public Stock getStock() {
-        return stock;
-    }
-
-    public void setStock(Stock stock) {
-        this.stock = stock;
-    }
+    public BigDecimal getMarketValue() { return marketValue; }
+    public void setMarketValue(BigDecimal marketValue) { this.marketValue = marketValue; }
 }
