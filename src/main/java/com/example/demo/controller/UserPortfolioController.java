@@ -1,34 +1,41 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.User;
 import com.example.demo.model.UserPortfolio;
-import com.example.demo.model.PortfolioHolding;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.service.UserPortfolioService;
+import com.example.demo.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/portfolio")
+@RequestMapping("/api/portfolios")
 public class UserPortfolioController {
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserPortfolio> getPortfolio(@PathVariable Long userId) {
-        // Mock implementation
+    @Autowired
+    private UserPortfolioService portfolioService;
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping
+    public UserPortfolio createPortfolio(@RequestParam Long userId,
+                                         @RequestParam String portfolioName) {
         UserPortfolio portfolio = new UserPortfolio();
-        portfolio.setUserId(userId);
-        return ResponseEntity.ok(portfolio);
+        User user = userService.findById(userId);
+        portfolio.setUser(user);            // fixed
+        portfolio.setPortfolioName(portfolioName);
+        return portfolioService.createPortfolio(portfolio);
     }
 
-    @PostMapping("/{userId}/holdings")
-    public ResponseEntity<PortfolioHolding> addHolding(@PathVariable Long userId,
-                                                       @RequestBody PortfolioHolding holding) {
-        // Mock implementation: add holding to user portfolio
-        return ResponseEntity.ok(holding);
+    @GetMapping("/{id}")
+    public UserPortfolio getPortfolio(@PathVariable Long id) {
+        return portfolioService.getPortfolioById(id);
     }
 
-    @GetMapping("/{userId}/holdings")
-    public ResponseEntity<List<PortfolioHolding>> getHoldings(@PathVariable Long userId) {
-        // Mock implementation
-        return ResponseEntity.ok(List.of());
+    @GetMapping("/user/{userId}")
+    public List<UserPortfolio> getUserPortfolios(@PathVariable Long userId) {
+        return portfolioService.getPortfoliosByUser(userId);
     }
 }

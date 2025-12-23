@@ -1,71 +1,49 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.UserPortfolio;
 import com.example.demo.model.PortfolioHolding;
 import com.example.demo.model.Stock;
+import com.example.demo.model.UserPortfolio;
 import com.example.demo.repository.PortfolioHoldingRepository;
-import com.example.demo.repository.UserPortfolioRepository;
-import com.example.demo.repository.StockRepository;
 import com.example.demo.service.PortfolioHoldingService;
+import com.example.demo.service.StockService;
+import com.example.demo.service.UserPortfolioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
-    private final PortfolioHoldingRepository holdingRepo;
-    private final UserPortfolioRepository portfolioRepo;
-    private final StockRepository stockRepo;
+    @Autowired
+    private PortfolioHoldingRepository holdingRepository;
 
-    public PortfolioHoldingServiceImpl(
-            PortfolioHoldingRepository holdingRepo,
-            UserPortfolioRepository portfolioRepo,
-            StockRepository stockRepo) {
-        this.holdingRepo = holdingRepo;
-        this.portfolioRepo = portfolioRepo;
-        this.stockRepo = stockRepo;
-    }
+    @Autowired
+    private UserPortfolioService portfolioService;
+
+    @Autowired
+    private StockService stockService;
 
     @Override
     public PortfolioHolding addHolding(Long portfolioId, Long stockId, PortfolioHolding holding) {
+        UserPortfolio portfolio = portfolioService.getPortfolioById(portfolioId);
+        Stock stock = stockService.getStockById(stockId);
 
-        UserPortfolio portfolio = portfolioRepo.findById(portfolioId)
-                .orElseThrow(() -> new RuntimeException("Portfolio not found"));
+        if (holding.getQuantity() <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than 0");
+        }
+        if (holding.getMarketValue().compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Market value cannot be negative");
+        }
 
-        Stock stock = stockRepo.findById(stockId)
-                .orElseThrow(() -> new RuntimeException("Stock not found"));
-
-        holding.setPortfolio(portfolio);
-        holding.setStock(stock);
-
-        return holdingRepo.save(holding);
+        holding.setPortfolio(portfolio);   // fixed
+        holding.setStock(stock);           // fixed
+        return holdingRepository.save(holding);
     }
 
     @Override
     public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
-        return holdingRepo.findByPortfolioId(portfolioId);
-    }
-
-    @Override
-    public PortfolioHolding getHoldingById(Long holdingId) {
-        return holdingRepo.findById(holdingId)
-                .orElseThrow(() -> new RuntimeException("Holding not found"));
-    }
-
-    @Override
-    public PortfolioHolding updateHolding(Long holdingId, PortfolioHolding holding) {
-
-        PortfolioHolding existing = getHoldingById(holdingId);
-
-        existing.setQuantity(holding.getQuantity());
-        existing.setBuyPrice(holding.getBuyPrice());
-
-        return holdingRepo.save(existing);
-    }
-
-    @Override
-    public void deleteHolding(Long holdingId) {
-        holdingRepo.deleteById(holdingId);
+        return holdingRepository.findByPortfolioId(portfolioId);
     }
 }

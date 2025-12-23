@@ -1,40 +1,42 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
 import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import com.example.demo.security.JwtUtil;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
 
-    private final JwtUtil jwtUtil;
+    @Autowired
+    private UserService userService;
 
-    public AuthController(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    // Login endpoint
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody User request) {
-        // Normally you would validate user credentials here
-        User user = request; // For demo, we assume the request contains valid user info
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        User user = userService.findByEmail(request.getEmail());
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
 
-        // Generate token
-        String token = jwtUtil.generateToken(
-                user.getUsername(),
-                user.getId(),
-                user.getRole()
-        );
+        String token = jwtUtil.generateToken(user);
 
         AuthResponse response = new AuthResponse();
-        response.setUsername(user.getUsername());
         response.setUserId(user.getId());
-        response.setRole(user.getRole());
+        response.setEmail(user.getEmail());       // fixed
+        response.setRole(user.getRole());         // fixed
         response.setToken(token);
 
-        return ResponseEntity.ok(response);
+        return response;
     }
 }
