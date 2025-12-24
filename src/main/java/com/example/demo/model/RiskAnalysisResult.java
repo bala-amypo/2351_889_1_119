@@ -1,49 +1,12 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
-@Entity
 public class RiskAnalysisResult {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    private UserPortfolio portfolio;
-
-    private LocalDateTime analysisDate;
     private Double highestStockPercentage;
-    private Double highestSectorPercentage;
     private Boolean isHighRisk;
-    private String notes;
-
-    // ----- Getters & Setters -----
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public UserPortfolio getPortfolio() {
-        return portfolio;
-    }
-
-    public void setPortfolio(UserPortfolio portfolio) {
-        this.portfolio = portfolio;
-    }
-
-    public LocalDateTime getAnalysisDate() {
-        return analysisDate;
-    }
-
-    public void setAnalysisDate(LocalDateTime analysisDate) {
-        this.analysisDate = analysisDate;
-    }
+    private Timestamp analysisDate;
 
     public Double getHighestStockPercentage() {
         return highestStockPercentage;
@@ -53,27 +16,19 @@ public class RiskAnalysisResult {
         this.highestStockPercentage = highestStockPercentage;
     }
 
-    public Double getHighestSectorPercentage() {
-        return highestSectorPercentage;
-    }
-
-    public void setHighestSectorPercentage(Double highestSectorPercentage) {
-        this.highestSectorPercentage = highestSectorPercentage;
-    }
-
-    public Boolean getIsHighRisk() {
+    public Boolean isHighRisk() {
         return isHighRisk;
     }
 
-    public void setIsHighRisk(Boolean isHighRisk) {
-        this.isHighRisk = isHighRisk;
+    public void setHighRisk(Boolean highRisk) {
+        isHighRisk = highRisk;
     }
 
-    public String getNotes() {
-        return notes;
+    public Timestamp getAnalysisDate() {
+        return analysisDate;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setAnalysisDate(Timestamp analysisDate) {
+        this.analysisDate = analysisDate;
     }
 }
