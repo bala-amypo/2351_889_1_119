@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "users") // optional, just to specify table name
 public class User {
 
     @Id
@@ -13,17 +14,24 @@ public class User {
     private String username;
     private String password;
 
-    // Add this field
+    // Add missing fields
+    private String email;
+    private String role;
+
     private LocalDateTime createdAt;
 
-    // Constructors, getters, setters
-
+    // Constructors
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, String email, String role) {
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.role = role;
+        this.createdAt = LocalDateTime.now();
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -49,7 +57,22 @@ public class User {
         this.password = password;
     }
 
-    // Getter and setter for createdAt
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
