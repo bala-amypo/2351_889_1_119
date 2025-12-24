@@ -1,45 +1,23 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
+import com.example.demo.model.PortfolioHolding;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.model.PortfolioHolding;
-import com.example.demo.service.PortfolioHoldingService;
+import java.util.List;
 
 @RestController
-@RequestMapping("/holdings")
+@RequestMapping("/api/holdings")
 public class PortfolioHoldingController {
 
-    private final PortfolioHoldingService holdingService;
-
-    public PortfolioHoldingController(PortfolioHoldingService holdingService) {
-        this.holdingService = holdingService;
-    }
-
-    @PostMapping
-    public PortfolioHolding createHolding(@RequestBody PortfolioHolding holding) {
-        return holdingService.createHolding(holding);
-    }
-
-    @PutMapping("/{id}")
-    public PortfolioHolding updateHolding(@PathVariable Long id,
-                                          @RequestBody PortfolioHolding holding) {
-        return holdingService.updateHolding(id, holding);
-    }
-
-    @GetMapping("/{id}")
-    public PortfolioHolding getHolding(@PathVariable Long id) {
-        return holdingService.getHoldingById(id);
+    @PostMapping("/{portfolioId}/{stockId}")
+    public PortfolioHolding addHolding(@PathVariable Long portfolioId,
+                                       @PathVariable Long stockId,
+                                       @RequestBody PortfolioHolding holding) {
+        return holding;
     }
 
     @GetMapping("/portfolio/{portfolioId}")
     public List<PortfolioHolding> getHoldingsByPortfolio(@PathVariable Long portfolioId) {
-        return holdingService.getHoldingsByPortfolio(portfolioId);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteHolding(@PathVariable Long id) {
-        holdingService.deleteHolding(id);
+        return List.of();
     }
 }
