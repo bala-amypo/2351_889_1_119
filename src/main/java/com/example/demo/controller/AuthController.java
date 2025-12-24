@@ -33,14 +33,14 @@ public class AuthController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),   // ✅ fixed
-                        request.getPassword() // ✅ fixed
+                        request.getEmail(),
+                        request.getPassword()
                 )
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        User user = userService.findByEmail(request.getEmail())   // ✅ fixed
+        User user = userService.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         String token = jwtUtil.generateToken(
