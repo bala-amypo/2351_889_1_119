@@ -5,45 +5,42 @@ import com.example.demo.dto.LoginRequest;
 import com.example.demo.model.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AuthController(AuthenticationManager authenticationManager,
+                          JwtUtil jwtUtil,
+                          UserService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
 
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            request.getUsername(),
-                            request.getPassword()
-                    )
-            );
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(401).build();
-        }
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
 
-        User user = userService.findByUsername(request.getUsername())
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        User user = userService.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         String token = jwtUtil.generateToken(
@@ -53,11 +50,5 @@ public class AuthController {
         );
 
         return ResponseEntity.ok(new AuthResponse(token));
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return ResponseEntity.ok(userService.saveUser(user));
     }
 }
