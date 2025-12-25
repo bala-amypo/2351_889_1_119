@@ -3,10 +3,12 @@ package com.example.demo.service.impl;
 import com.example.demo.model.RiskAnalysisResult;
 import com.example.demo.repository.*;
 import com.example.demo.service.RiskAnalysisService;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
 
+@Service   // ⭐⭐⭐ THIS FIXES EVERYTHING
 public class RiskAnalysisServiceImpl implements RiskAnalysisService {
 
     private final RiskAnalysisResultRepository analysisRepo;
