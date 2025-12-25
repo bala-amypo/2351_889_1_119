@@ -40,8 +40,8 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        User user = userService.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userService.findByEmail(request.getEmail());
+                // .orElseThrow(() -> new RuntimeException("User not found"));
 
         String token = jwtUtil.generateToken(
                 user.getEmail(),
