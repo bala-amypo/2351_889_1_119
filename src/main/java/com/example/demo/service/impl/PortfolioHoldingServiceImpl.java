@@ -9,24 +9,31 @@ import java.util.List;
 @Service
 public class PortfolioHoldingServiceImpl implements PortfolioHoldingService {
 
-    private final PortfolioHoldingRepository portfolioHoldingRepository;
+    private final PortfolioHoldingRepository repository;
 
-    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository portfolioHoldingRepository) {
-        this.portfolioHoldingRepository = portfolioHoldingRepository;
+    public PortfolioHoldingServiceImpl(PortfolioHoldingRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public PortfolioHolding saveHolding(PortfolioHolding holding) {
-        return portfolioHoldingRepository.save(holding);
+    public PortfolioHolding createHolding(PortfolioHolding holding) {
+        return repository.save(holding);
     }
 
     @Override
-    public List<PortfolioHolding> getHoldingsByUserId(Long userId) {
-        return portfolioHoldingRepository.findByUserId(userId);
+    public PortfolioHolding updateHolding(Long id, PortfolioHolding holding) {
+        holding.setId(id);
+        return repository.save(holding);
     }
 
     @Override
-    public void deleteHolding(Long holdingId) {
-        portfolioHoldingRepository.deleteById(holdingId);
+    public PortfolioHolding getHoldingById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("PortfolioHolding not found"));
+    }
+
+    @Override
+    public List<PortfolioHolding> getHoldingsByPortfolio(Long portfolioId) {
+        return repository.findByPortfolioId(portfolioId);
     }
 }

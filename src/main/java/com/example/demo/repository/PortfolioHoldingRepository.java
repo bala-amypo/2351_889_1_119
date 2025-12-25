@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PortfolioHoldingRepository extends JpaRepository<PortfolioHolding, Long> {
 
-    List<PortfolioHolding> findByUserId(Long userId);
+    List<PortfolioHolding> findByPortfolioId(Long portfolioId);
 }
