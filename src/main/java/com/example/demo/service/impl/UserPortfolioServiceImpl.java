@@ -3,9 +3,10 @@ package com.example.demo.service.impl;
 import com.example.demo.model.UserPortfolio;
 import com.example.demo.repository.UserPortfolioRepository;
 import com.example.demo.service.UserPortfolioService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class UserPortfolioServiceImpl implements UserPortfolioService {
 
     private final UserPortfolioRepository repository;
