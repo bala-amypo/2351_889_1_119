@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service   // ⭐⭐⭐ THIS IS THE FIX
+@Service
 public class RiskThresholdServiceImpl implements RiskThresholdService {
 
     private final RiskThresholdRepository repository;
@@ -47,5 +47,15 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     @Override
     public void deleteThreshold(Long id) {
         repository.deleteById(id);
+    }
+
+    // ✅ ⭐⭐ MISSING METHOD — NOW IMPLEMENTED ⭐⭐
+    @Override
+    public RiskThreshold getActiveThreshold() {
+        // Simple safe implementation
+        return repository.findAll()
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 }
