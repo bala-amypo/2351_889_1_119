@@ -12,9 +12,10 @@ public class RiskThreshold {
     private Double minValue;
     private Double maxValue;
     private String riskLevel;
-
-    // ⭐ REQUIRED FOR findByActiveTrue()
     private boolean active;
+
+    // ✅ REQUIRED BY TESTS
+    private Double maxSingleStockPercentage;
 
     // ===== GETTERS =====
     public Long getId() {
@@ -37,6 +38,10 @@ public class RiskThreshold {
         return active;
     }
 
+    public Double getMaxSingleStockPercentage() {
+        return maxSingleStockPercentage;
+    }
+
     // ===== SETTERS =====
     public void setMinValue(Double minValue) {
         this.minValue = minValue;
@@ -52,5 +57,9 @@ public class RiskThreshold {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public void setMaxSingleStockPercentage(Double maxSingleStockPercentage) {
+        this.maxSingleStockPercentage = maxSingleStockPercentage;
     }
 }
