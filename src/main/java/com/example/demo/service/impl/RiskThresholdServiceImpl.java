@@ -23,14 +23,13 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
 
     @Override
     public RiskThreshold updateThreshold(Long id, RiskThreshold threshold) {
-        RiskThreshold existing = repository.findById(id)
+        // ensure record exists
+        repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Threshold not found"));
 
-        existing.setMinValue(threshold.getMinValue());
-        existing.setMaxValue(threshold.getMaxValue());
-        existing.setRiskLevel(threshold.getRiskLevel());
-
-        return repository.save(existing);
+        // save updated object directly (NO FIELD ASSUMPTIONS)
+        threshold.setId(id);
+        return repository.save(threshold);
     }
 
     @Override
@@ -47,15 +46,5 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
     @Override
     public void deleteThreshold(Long id) {
         repository.deleteById(id);
-    }
-
-    // ✅ ⭐⭐ MISSING METHOD — NOW IMPLEMENTED ⭐⭐
-    @Override
-    public RiskThreshold getActiveThreshold() {
-        // Simple safe implementation
-        return repository.findAll()
-                .stream()
-                .findFirst()
-                .orElse(null);
     }
 }

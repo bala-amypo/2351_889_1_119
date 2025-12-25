@@ -30,11 +30,6 @@ public class RiskThresholdController {
         return ResponseEntity.ok(service.updateThreshold(id, threshold));
     }
 
-    @GetMapping("/active")
-    public ResponseEntity<RiskThreshold> getActiveThreshold() {
-        return ResponseEntity.ok(service.getActiveThreshold());
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<RiskThreshold> getThreshold(@PathVariable Long id) {
         return ResponseEntity.ok(service.getThresholdById(id));
