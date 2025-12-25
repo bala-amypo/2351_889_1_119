@@ -3,58 +3,43 @@ package com.example.demo.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(
-        name = "risk_thresholds",
-        uniqueConstraints = @UniqueConstraint(columnNames = "thresholdName")
-)
 public class RiskThreshold {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String thresholdName;
+    private Double minValue;
+    private Double maxValue;
+    private String riskLevel;
 
-    private Double maxSingleStockPercentage;
-
-    private Double maxSectorPercentage;
-
-    private Boolean active = true;
-
-    // Getters & Setters
+    // ===== GETTERS =====
     public Long getId() {
         return id;
     }
 
-    public String getThresholdName() {
-        return thresholdName;
+    public Double getMinValue() {
+        return minValue;
     }
 
-    public void setThresholdName(String thresholdName) {
-        this.thresholdName = thresholdName;
+    public Double getMaxValue() {
+        return maxValue;
     }
 
-    public Double getMaxSingleStockPercentage() {
-        return maxSingleStockPercentage;
+    public String getRiskLevel() {
+        return riskLevel;
     }
 
-    public void setMaxSingleStockPercentage(Double maxSingleStockPercentage) {
-        this.maxSingleStockPercentage = maxSingleStockPercentage;
+    // ===== SETTERS =====
+    public void setMinValue(Double minValue) {
+        this.minValue = minValue;
     }
 
-    public Double getMaxSectorPercentage() {
-        return maxSectorPercentage;
+    public void setMaxValue(Double maxValue) {
+        this.maxValue = maxValue;
     }
 
-    public void setMaxSectorPercentage(Double maxSectorPercentage) {
-        this.maxSectorPercentage = maxSectorPercentage;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setRiskLevel(String riskLevel) {
+        this.riskLevel = riskLevel;
     }
 }

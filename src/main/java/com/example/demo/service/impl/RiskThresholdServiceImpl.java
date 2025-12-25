@@ -26,7 +26,6 @@ public class RiskThresholdServiceImpl implements RiskThresholdService {
         RiskThreshold existing = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Threshold not found"));
 
-        // ⚠️ DO NOT SET ID — entity does not have setId()
         existing.setMinValue(threshold.getMinValue());
         existing.setMaxValue(threshold.getMaxValue());
         existing.setRiskLevel(threshold.getRiskLevel());
